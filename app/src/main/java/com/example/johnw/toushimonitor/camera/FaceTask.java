@@ -83,6 +83,10 @@ public class FaceTask extends AsyncTask<String, Void, String>{
 
     @Override
     protected String doInBackground(String... params) {
+        //正在扫描图片不进行图片扫描
+        if (((MainActivity)context).GetIsScan()) {
+            return null;
+        }
         Camera.Parameters parameters = mCamera.getParameters();
         int imageFormat = parameters.getPreviewFormat();
         int w = parameters.getPreviewSize().width;

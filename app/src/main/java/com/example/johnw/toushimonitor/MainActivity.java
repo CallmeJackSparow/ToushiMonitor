@@ -79,10 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mScanView;
     private ImageView mFigureView;
 
+    int mFaceCount = 0; //人脸数量
+    int mFaceCountInsistTime = 0; //持续次数
     int mPlayIndex = -1; //播放扫描视频时间点
     int mChangeActivityIndex = -1; //切换Activity时间点
 
-    boolean mStartScan;
+    boolean mIsScan;
 
     boolean mTouchScreen = false;
 
@@ -156,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
         //主界面1图片旋转效果
         mBack1View = (ImageView) findViewById(R.id.back1);
         mBack2View = (ImageView) findViewById(R.id.back2);
+
+        mSettingButton = (Button) findViewById(R.id.btnSettings);
 
         mTimer = new Timer();
         mTimerTask = new TimerTask() {
@@ -321,7 +325,13 @@ public class MainActivity extends AppCompatActivity {
         return mAccessToken;
     }
 
+    public boolean GetIsScan() { return mIsScan; }
+
+    //转换模式----连续三次是同一个模式则进入扫描阶段
     public void ChangeViewMode(String faceInfo) { //解析图片完成进行等待两秒之后
+        if (mIsScan) {
+            return;
+        }
         mStrFaceInfo = faceInfo;
         mMainLayout.setVisibility(View.INVISIBLE);
         int faceNum = GetFaceNum(faceInfo);
@@ -333,6 +343,35 @@ public class MainActivity extends AppCompatActivity {
             mKoImageView.setVisibility(View.VISIBLE);
             mTitleLayout.setVisibility(View.INVISIBLE);
         }
+
+        if (mFaceCount != faceNum) {
+            mFaceCount = faceNum;
+        }
+        else {
+            mFaceCountInsistTime++;
+        }
+
+        if (mFaceCountInsistTime > 2) { // 进入扫描阶段
+            ScanFigure(faceInfo);
+            mIsScan = true;
+        }
+
+    }
+
+    //扫描人像
+    public void ScanFigure(String faceinfo) {
+        mSurfaceView.setVisibility(View.INVISIBLE);
+        mFigureView.setVisibility(View.VISIBLE);
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image/face.jpg";
+        mFigureView.setImageBitmap(handleBitmap.GetNormalBitmap(path));
+
+        mPlayIndex = mIndex;
+        mScanView.setLeft(0);
+        mScanView.setTop(0);
+        mScanView.setRight(1080);
+        mScanView.setBottom(1920);
+        mScanView.setVisibility(View.VISIBLE);
+        ((AnimationDrawable)mScanView.getBackground()).start();
     }
 
     public int GetFaceNum(String info) {
