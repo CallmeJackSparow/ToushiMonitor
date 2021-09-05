@@ -60,6 +60,7 @@ public class FaceTask extends AsyncTask<String, Void, String>{
         this.context = context;
         this.mData = data;
         this.mCamera = camera;
+        mAccessToken = ((MainActivity)context).GetAccessToken();
     }
 
     //任务执行之前的操作

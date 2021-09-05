@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             int responseCode = httpURLConnection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 InputStream is = httpURLConnection.getInputStream();
-                String state = getAccessToken(is);
+                String state = ParseAccessToken(is);
                 //RequestFaceInfo(state);
                 return state;
             }
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //解析AccessToken信息
-    private String getAccessToken(InputStream is) throws Exception {
+    private String ParseAccessToken(InputStream is) throws Exception {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buff = new byte[1024];
         int len = -1;
@@ -277,6 +277,10 @@ public class MainActivity extends AppCompatActivity {
         mAccessToken = object.getString("access_token");
         outputStream.close();
         return html;
+    }
+
+    public String GetAccessToken()  {
+        return mAccessToken;
     }
 
     public void ChangeViewMode(String faceInfo) { //解析图片完成进行等待两秒之后
