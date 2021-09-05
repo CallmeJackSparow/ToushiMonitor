@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     int mPlayIndex = -1; //播放扫描视频时间点
     int mChangeActivityIndex = -1; //切换Activity时间点
+
     boolean mStartScan;
 
     boolean mTouchScreen = false;
@@ -109,16 +110,20 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //在运行之前先获取百度接口的accessToken值
+        PostAccessToken();
         //程序权限申请
         requestPermission();
 
-        //初始化界面信息
-        String titleName = sharedPreferences.getString("titleText", "颜值机");
-        String companyName = sharedPreferences.getString("companyText", "TOUSHI Tech");
+        //初始化主界面信息
+        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String titleName = sharedPreferences.getString("titleText", "颜值机"); //标题信息
+        String companyName = sharedPreferences.getString("companyText", "TOUSHI Tech"); //公司信息
         int titleSize = sharedPreferences.getInt("titleSize", 80);
         int companySize = sharedPreferences.getInt("companySize", 50);
+
+        String logoPath = sharedPreferences.getString("logoPath", "");
 
         mTitleView = (TextView) findViewById(R.id.deviceName);
         mCompanyView = (TextView) findViewById(R.id.companyView);
@@ -219,9 +224,87 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
-        //startCamera(imageFileName);
         mCameraSurfaceHolder.setCameraSurfaceHolder(this, mSurfaceView);
-        //mCameraSurfaceHolder.SetImagePath(imageFileName);
-        //initCamera();
     }
+
+    //请求百度AccessToken
+    public String PostAccessToken() {
+        HttpURLConnection httpURLConnection = null;
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("grant_type=").append(GrantType).append("&");
+        buffer.append("client_id=").append(ClientId).append("&");
+        buffer.append("client_secret=").append(ClientSecret);
+        byte[] mydata = buffer.toString().getBytes();
+        try {
+
+            URL url = new URL(AccessTokenUrl + "?" + buffer);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(7000);
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setUseCaches(false);
+            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            int responseCode = httpURLConnection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream is = httpURLConnection.getInputStream();
+                String state = getAccessToken(is);
+                //RequestFaceInfo(state);
+                return state;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (httpURLConnection != null) {
+                httpURLConnection.disconnect();
+            }
+        }
+        return null;
+    }
+
+    //解析AccessToken信息
+    private String getAccessToken(InputStream is) throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buff = new byte[1024];
+        int len = -1;
+        while ((len = is.read(buff))!=-1) {
+            outputStream.write(buff, 0, len);
+        }
+        is.close();
+
+        String html = outputStream.toString();
+        JSONObject object = new JSONObject(html);
+        mAccessToken = object.getString("access_token");
+        outputStream.close();
+        return html;
+    }
+
+    public void ChangeViewMode(String faceInfo) { //解析图片完成进行等待两秒之后
+        mStrFaceInfo = faceInfo;
+        mMainLayout.setVisibility(View.INVISIBLE);
+        int faceNum = GetFaceNum(faceInfo);
+
+        if (faceNum == 1) {
+            mTitleLayout.setVisibility(View.VISIBLE);
+            mKoImageView.setVisibility(View.INVISIBLE);
+        } else if (faceNum == 2) {
+            mKoImageView.setVisibility(View.VISIBLE);
+            mTitleLayout.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public int GetFaceNum(String info) {
+        int faceNum = 0;
+        try {
+            JSONObject object = new JSONObject(info);
+            String resultMsg = object.getString("result");
+            JSONObject objFaceInfo = new JSONObject(resultMsg);
+            faceNum = objFaceInfo.getInt("face_num");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return faceNum;
+    }
+
+
 }

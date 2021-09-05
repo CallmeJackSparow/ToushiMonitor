@@ -75,6 +75,7 @@ public class FaceTask extends AsyncTask<String, Void, String>{
         //如果检测到人脸进入该第二阶段
         if (mHasFace) { //检测到人脸将数据传回主界面进行处理
             //返回回调信息
+            ((MainActivity)context).ChangeViewMode(mFaceInfo); //传递人脸数据信息到主界面
             this.onSuccessListener.onSuccess();
         }
     }
@@ -86,8 +87,114 @@ public class FaceTask extends AsyncTask<String, Void, String>{
         int w = parameters.getPreviewSize().width;
         int h = parameters.getPreviewSize().height;
 
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image";
+
+        Rect rect = new Rect(0, 0, w, h);
+        YuvImage yuvImg = new YuvImage(mData, imageFormat, w, h, null);
+        try {
+            //若要存储可以用下列代码，p格式为jpg
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + "/face.jpg"));
+            yuvImg.compressToJpeg(rect, 50, bos);
+            bos.flush();
+            bos.close();
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Bitmap rawbitmap = BitmapFactory.decodeFile(path + "/face.jpg");
+            rawbitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            String picString = Base64.encodeToString(outputStream.toByteArray(), Base64.NO_WRAP);
+            mFaceInfo = RequestFaceInfo(picString);
+            //mCamera.startPreview();
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "onPreviewFrame: 获取相机实时数据失败" + e.getLocalizedMessage());
+        }
         return null;
     }
+
+    private String RequestFaceInfo(String picData) {
+        //Toast.makeText(context, "上传图片 ", Toast.LENGTH_SHORT).show();
+        HttpURLConnection httpURLConnection = null;
+        String responseInfo = null;
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("access_token=").append(mAccessToken);
+        StringBuffer requestBody = new StringBuffer();
+        try {
+            URL url = new URL(FeatureUrl + "?" + buffer);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(3000);
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setUseCaches(false);
+            httpURLConnection.setRequestProperty("content-type", "application/json;charset=UTF-8");
+
+            requestBody.append("max_face_num=2&");//
+            requestBody.append("image_type=BASE64&");
+            requestBody.append("face_field=beauty,gender,age,emotion,expression,glasses,mask,face_shape,eye_status&");
+            requestBody.append("image=");
+            requestBody.append(URLEncoder.encode(picData));
+
+            OutputStream os = httpURLConnection.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+            String responseString = new String(requestBody);
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image";
+            File saveFile = new File(path, "string.txt");
+            FileOutputStream outputStream1 = null;
+            try {
+                outputStream1 = new FileOutputStream(saveFile);
+                outputStream1.write(responseString.getBytes("UTF-8"));
+                outputStream1.close();
+                outputStream1.flush();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            osw.write(responseString);
+            int responseCode = httpURLConnection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream isResponse = httpURLConnection.getInputStream();
+                responseInfo = GetFaceInfo(isResponse);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseInfo;
+    }
+
+    private String GetFaceInfo(InputStream is) throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buff = new byte[1024];
+        int len = -1;
+        while ((len = is.read(buff))!=-1) {
+            outputStream.write(buff, 0, len);
+        }
+        is.close();
+
+        String html = outputStream.toString();
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image";
+        File saveFile = new File(path, "result.txt");
+        FileOutputStream outputStream1 = null;
+        try {
+            outputStream1 = new FileOutputStream(saveFile);
+            outputStream1.write(html.getBytes("GBK"));
+            outputStream1.close();
+            outputStream1.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject object = new JSONObject(html);
+        String errMsg = object.getString("error_msg");
+
+        if (errMsg.matches("SUCCESS")) {
+            mHasFace = true;
+        }
+        outputStream.close();
+        return html;
+    }
+
 
     public OnSuccessListener onSuccessListener;
 

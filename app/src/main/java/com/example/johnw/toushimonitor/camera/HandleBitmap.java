@@ -37,6 +37,17 @@ import java.security.spec.ECField;
 
 public class HandleBitmap {
 
+    public static Bitmap GetNormalBitmap(String pImagePath) { //获取最原始的图片Bitmap信息
+        Bitmap originBitmap = null;
+        try {
+            FileInputStream fis = new FileInputStream(pImagePath);
+            originBitmap = BitmapFactory.decodeStream(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return originBitmap;
+    }
+
     public static Bitmap getBitmap(String pImagePath)
     {
         File file = new File(pImagePath);
