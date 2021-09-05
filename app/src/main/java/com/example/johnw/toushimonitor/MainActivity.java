@@ -54,8 +54,6 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private Camera mCamera;
-    private SurfaceView mSurfaceView;
-    private ImageView mImageView;
 
     CameraSurfaceHolder mCameraSurfaceHolder = new CameraSurfaceHolder();
     public View mView;
@@ -68,11 +66,18 @@ public class MainActivity extends AppCompatActivity {
     public RelativeLayout mLayout; //展示界面布局
     public RelativeLayout mMainLayout; //覆盖整个界面的布局
 
-    private ImageView mKoImageView;
-    private ImageView mScanView;
-
+    //主界面1控件
     private TextView mTitleView;
     private TextView mCompanyView;
+    private ImageView mBack1View;
+    private ImageView mBack2View;
+
+    //主界面2控件
+    private SurfaceView mSurfaceView;
+    private ImageView mLogoImage;
+    private ImageView mKoImageView;
+    private ImageView mScanView;
+    private ImageView mFigureView;
 
     int mPlayIndex = -1; //播放扫描视频时间点
     int mChangeActivityIndex = -1; //切换Activity时间点
@@ -125,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
 
         String logoPath = sharedPreferences.getString("logoPath", "");
 
+        //主界面1控件
+        mMainLayout = (RelativeLayout) findViewById(R.id.mainLayout); //主界面1布局
+        mMainLayout.setVisibility(View.VISIBLE); //设置主界面可见
         mTitleView = (TextView) findViewById(R.id.deviceName);
         mCompanyView = (TextView) findViewById(R.id.companyView);
         mTitleView.setText(titleName);
@@ -132,15 +140,45 @@ public class MainActivity extends AppCompatActivity {
         mCompanyView.setText(companyName);
         mCompanyView.setTextSize(companySize);
 
-        mMainLayout = (RelativeLayout) findViewById(R.id.mainLayout);
-        mTitleLayout = (RelativeLayout) findViewById(R.id.mainTotalLayout);
+        //主界面2控件
+        mTitleLayout = (RelativeLayout) findViewById(R.id.mainTotalLayout); //界面2人数显示布局
+        mTitleLayout.setVisibility(View.INVISIBLE);
 
         mKoImageView = (ImageView) findViewById(R.id.koTitle);
-        mScanView = (ImageView)findViewById(R.id.scanVideo);
-        mTitleLayout.setVisibility(View.INVISIBLE);
         mKoImageView.setVisibility(View.INVISIBLE);
+
+        mScanView = (ImageView)findViewById(R.id.scanVideo);
         mScanView.setVisibility(View.INVISIBLE);
-        mMainLayout.setVisibility(View.VISIBLE); //设置主界面可见
+
+        mFigureView = (ImageView) findViewById(R.id.figure); //头像展示
+        mFigureView.setVisibility(View.INVISIBLE);
+
+        //主界面1图片旋转效果
+        mBack1View = (ImageView) findViewById(R.id.back1);
+        mBack2View = (ImageView) findViewById(R.id.back2);
+
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (mIndex < 180) {
+                    mBack1View.setRotation(mIndex * -2);
+                    mBack2View.setRotation(mIndex * 2);
+                    mIndex++;
+                }
+                else {
+                    mIndex = 0;
+                }
+
+                if (mPlayIndex != -1) {
+                    if (mPlayIndex - mIndex == -60 || mPlayIndex - mIndex == 60) {
+                        //ChangeActivity();
+                        mPlayIndex = -1;
+                    }
+                }
+            }
+        };
+        mTimer.schedule(mTimerTask, 0, 100);
     }
 
     //Android11申请权限
