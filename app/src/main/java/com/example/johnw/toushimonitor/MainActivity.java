@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mKoImageView;
     private ImageView mScanView;
     private ImageView mFigureView;
+    private TextView mUserCount;
 
     int mFaceCount = 0; //人脸数量
     int mFaceCountInsistTime = 0; //持续次数
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         int companySize = sharedPreferences.getInt("companySize", 50);
 
         String logoPath = sharedPreferences.getString("logoPath", "");
+        int mCount = sharedPreferences.getInt("count", 0);
 
         //主界面1控件
         mMainLayout = (RelativeLayout) findViewById(R.id.mainLayout); //主界面1布局
@@ -155,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
         mFigureView = (ImageView) findViewById(R.id.figure); //头像展示
         mFigureView.setVisibility(View.INVISIBLE);
 
+        mUserCount = (TextView) findViewById(R.id.totalNum);
+        mUserCount.setText(Integer.toString(mCount));
+
         //主界面1图片旋转效果
         mBack1View = (ImageView) findViewById(R.id.back1);
         mBack2View = (ImageView) findViewById(R.id.back2);
@@ -176,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mPlayIndex != -1) {
                     if (mPlayIndex - mIndex == -60 || mPlayIndex - mIndex == 60) {
-                        //ChangeActivity();
+                        ChangeActivity();
                         mPlayIndex = -1;
                     }
                 }
@@ -365,6 +370,8 @@ public class MainActivity extends AppCompatActivity {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image/face.jpg";
         mFigureView.setImageBitmap(handleBitmap.GetNormalBitmap(path));
 
+        SetUserCount();
+
         mPlayIndex = mIndex;
         mScanView.setLeft(0);
         mScanView.setTop(0);
@@ -372,6 +379,19 @@ public class MainActivity extends AppCompatActivity {
         mScanView.setBottom(1920);
         mScanView.setVisibility(View.VISIBLE);
         ((AnimationDrawable)mScanView.getBackground()).start();
+    }
+
+    //切换界面信息
+    public void ChangeActivity(){
+        if (mFaceCount == 1) {
+            Intent intent = new Intent(MainActivity.this, faceAnalysisActivity.class);
+            intent.putExtra("faceInfo", mStrFaceInfo);
+            startActivity(intent);
+        } else if (mFaceCount == 2) {
+            Intent intent = new Intent(MainActivity.this, PKActivity.class);
+            intent.putExtra("faceInfo", mStrFaceInfo);
+            startActivity(intent);
+        }
     }
 
     public int GetFaceNum(String info) {
@@ -387,5 +407,14 @@ public class MainActivity extends AppCompatActivity {
         return faceNum;
     }
 
+    //计算使用人次
+    public void SetUserCount() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
+        int mCount = sharedPreferences.getInt("count", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("count", mCount + 1);
+        editor.apply();
+        mUserCount.setText(String.valueOf(mCount + 1));
+    }
 
 }
