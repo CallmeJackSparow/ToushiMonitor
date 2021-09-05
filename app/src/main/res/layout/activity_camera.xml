@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/cameraSurface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0px"
+        android:background="#00000000"/>
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="1080px"
+        android:layout_height="250px"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/titleView"
+            android:layout_width="1080px"
+            android:layout_height="127px"
+            android:background="@drawable/banner"
+            android:scaleType="fitCenter"/>
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_width="478px"
+            android:layout_height="234px"
+            android:background="@drawable/title" />
+
+        <TextView
+            android:id="@+id/textInfo"
+            android:layout_centerHorizontal="true"
+            android:layout_width="478px"
+            android:layout_height="120px"
+            android:text="总人数"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/sourcehansans"/>
+
+        <TextView
+            android:id="@+id/totalNum"
+            android:layout_centerHorizontal="true"
+            android:layout_width="478px"
+            android:layout_height="120px"
+            android:layout_below="@+id/textInfo"
+            android:text="20000"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginTop="100px"
+        android:layout_width="820px"
+        android:layout_height="159px"
+        android:background="@drawable/ko"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:background="@drawable/logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

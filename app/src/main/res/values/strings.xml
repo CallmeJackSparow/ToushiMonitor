@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ToushiMonitor</string>
+    <string-array name="mode">
+        <item>单人SOLO</item>
+        <item>双人PK</item>
+    </string-array>
+</resources>

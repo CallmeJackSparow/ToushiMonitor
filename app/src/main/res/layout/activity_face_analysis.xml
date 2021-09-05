@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:id="@+id/totalTitleLayout"
+        android:layout_width="478px"
+        android:layout_height="234px"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/title"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="478px"
+            android:layout_height="120px"
+            android:layout_centerHorizontal="true"
+            android:text="总人数"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="50px"
+            android:fontFamily="@font/sourcehansans"/>
+
+        <TextView
+            android:id="@+id/totalNum2"
+            android:layout_width="478px"
+            android:layout_height="100px"
+            android:layout_centerHorizontal="true"
+            android:text="100"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="50px"
+            android:fontFamily="@font/roboto"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toushiLayout"
+        android:layout_width="653px"
+        android:layout_height="117px"
+        android:layout_marginTop="27dp"
+        android:layout_below="@id/totalTitleLayout"
+        android:background="@drawable/banner3"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="150px"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="-20px"
+            android:layout_below="@id/totalTitleLayout"
+            android:text="欢迎来到"
+            android:textSize="60px"
+            android:textColor="#FFFFFF"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/sourcehansans"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="280px"
+            android:layout_height="90px"
+            android:layout_marginTop="27px"
+            android:layout_marginEnd="17dp"
+            android:background="@drawable/logo3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/imgScoreLayout"
+        android:layout_below="@+id/toushiLayout"
+        android:layout_width="408px"
+        android:layout_height="215px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/facescore2"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="110px"
+            android:layout_marginLeft="40px"
+            android:text="颜值分数:"
+            android:textColor="#FFFF"
+            android:textSize="40px"
+            android:fontFamily="@font/sourcehansans"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/textScore"
+            android:layout_width="80px"
+            android:layout_height="110px"
+            android:textSize="40px"
+            android:text="100"
+            android:textColor="#FFFF"
+            android:fontFamily="@font/sourcehansans"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/faceScoreInfo"
+        android:layout_width="match_parent"
+        android:layout_height="600px"
+        android:layout_below="@id/imgScoreLayout">
+
+        <LinearLayout
+            android:layout_width="544px"
+            android:layout_height="547px"
+            android:background="@drawable/face"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:id="@+id/mainHeadView"
+                android:layout_gravity="center"
+                android:layout_marginLeft="60px"
+                android:layout_width="420px"
+                android:layout_height="420px" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/sexLayout"
+            android:layout_width="270px"
+            android:layout_height="125px"
+            android:layout_marginLeft="60px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="10px"
+                android:text="性别:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/sexInfo"
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="120px"
+                android:text="男"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="270px"
+                android:layout_height="17px"
+                android:layout_below="@id/sexInfo"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
+                android:background="@drawable/sexinfo2"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/glassLayout"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:layout_below="@id/sexLayout"
+            android:layout_marginLeft="80px"
+            android:layout_marginTop="30px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="10px"
+                android:text="眼镜:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/glassInfo"
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="120px"
+                android:text="有"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="200px"
+                android:layout_height="17px"
+                android:layout_below="@id/glassInfo"
+                android:background="@drawable/eyeinfo2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/moodLayout"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:layout_marginLeft="90px"
+            android:layout_below="@id/glassLayout"
+            android:layout_marginTop="30px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="10px"
+                android:text="情绪:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+            <TextView
+                android:id="@+id/moodInfo"
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="110px"
+                android:text="开心"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="200px"
+                android:layout_height="17px"
+                android:layout_below="@id/moodInfo"
+                android:background="@drawable/emotioninfo2"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="260px"
+            android:layout_height="100px"
+            android:layout_marginLeft="130px"
+            android:layout_below="@id/moodLayout"
+            android:layout_marginTop="30px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="10px"
+                android:text="脸型:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/faceInfo"
+                android:layout_width="120px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="110px"
+                android:text="瓜子脸"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="260px"
+                android:layout_height="17px"
+                android:layout_below="@+id/faceInfo"
+                android:background="@drawable/faceshapeinfo2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/age"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100px"
+            android:layout_width="220px"
+            android:layout_height="100px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="70px"
+                android:layout_marginLeft="10px"
+                android:layout_marginTop="15px"
+                android:text="年龄:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/ageInfo"
+                android:layout_width="120px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="110px"
+                android:text="34"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="220px"
+                android:layout_height="17px"
+                android:layout_below="@+id/ageInfo"
+                android:background="@drawable/ageinfo2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/faceExpression"
+            android:layout_below="@id/age"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="30px"
+            android:layout_alignParentRight="true"
+            android:layout_width="250px"
+            android:layout_height="100px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="69px"
+                android:layout_marginLeft="10px"
+                android:layout_marginTop="15px"
+                android:text="表情:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/motionInfo"
+                android:layout_width="200px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="110px"
+                android:text="无"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="180px"
+                android:layout_height="17px"
+                android:layout_below="@id/motionInfo"
+                android:background="@drawable/expressioninfo2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/maskLayout"
+            android:layout_below="@id/faceExpression"
+            android:layout_marginTop="30px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="110px"
+            android:layout_width="180px"
+            android:layout_height="100px">
+
+            <TextView
+                android:layout_width="100px"
+                android:layout_height="69px"
+                android:layout_marginLeft="10px"
+                android:layout_marginTop="15px"
+                android:text="口罩:"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <TextView
+                android:id="@+id/maskInfo"
+                android:layout_width="120px"
+                android:layout_height="70px"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="120px"
+                android:text="无"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="180px"
+                android:layout_height="17px"
+                android:layout_below="@+id/maskInfo"
+                android:background="@drawable/maskinfo2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/openEyeLayout"
+            android:layout_below="@id/maskLayout"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="115px"
+            android:layout_width="213px"
+            android:layout_height="120px"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/eyesInfo"
+                android:layout_width="200px"
+                android:layout_height="70px"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="0px"
+                android:text="睁眼"
+                android:textColor="#FFFF"
+                android:textSize="35px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="213px"
+                android:layout_height="51px"
+                android:layout_marginTop="30px"
+                android:background="@drawable/eyesopen"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/charmRank"
+        android:layout_marginTop="100px"
+        android:layout_below="@id/faceScoreInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/charmInfo"
+            android:layout_width="match_parent"
+            android:layout_height="140px"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="今日魅力排名:NO.1"
+            android:textColor="#FFFF"
+            android:textSize="50px"
+            android:fontFamily="@font/sourcehansans"/>
+
+        <TextView
+            android:id="@+id/jokeInfo"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="400px"
+            android:text="有一天，我上街，突然一群人把我围住。指着说我帅，我说我不帅，他们就打我，还说我虚伪"
+            android:textColor="#FFFF"
+            android:textSize="40px"
+            android:fontFamily="@font/sourcehansans"/>
+    </LinearLayout>
+</RelativeLayout>

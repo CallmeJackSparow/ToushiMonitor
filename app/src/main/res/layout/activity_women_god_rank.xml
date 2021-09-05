@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:id="@+id/totalTitleLayout"
+        android:layout_width="478px"
+        android:layout_height="234px"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/title"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="478px"
+            android:layout_height="120px"
+            android:layout_centerHorizontal="true"
+            android:text="总人数"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="50px"
+            android:fontFamily="@font/sourcehansans"/>
+
+        <TextView
+            android:id="@+id/totalNum2"
+            android:layout_width="478px"
+            android:layout_height="100px"
+            android:layout_centerHorizontal="true"
+            android:text="100"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:textSize="50px"
+            android:fontFamily="@font/roboto"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popupWindow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="322px">
+
+            <ImageView
+                android:layout_marginLeft="200px"
+                android:layout_width="48px"
+                android:layout_height="322px"
+                android:background="@drawable/link_left"/>
+
+            <ImageView
+                android:layout_marginLeft="832px"
+                android:layout_width="48px"
+                android:layout_height="322px"
+                android:background="@drawable/link_right"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="826px"
+            android:layout_height="1496px"
+            android:background="@drawable/popupwindow"
+            android:layout_gravity="center">
+
+
+            <ImageView
+                android:id="@+id/rankTitleBack"
+                android:layout_width="560px"
+                android:layout_height="120px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/ranktitle"
+                android:layout_marginLeft="60px"/>
+
+            <TextView
+                android:layout_width="560px"
+                android:layout_height="120px"
+                android:layout_marginTop="0px"
+                android:text="女神榜"
+                android:textColor="#FFFF"
+                android:textSize="60px"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/rostram"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="142px"
+                android:layout_width="400px"
+                android:layout_height="158px"
+                android:background="@drawable/rankbackground"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/womenRank1"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="20px"
+                android:layout_width="142px"
+                android:layout_height="142px"
+                android:background="@drawable/rank1"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/womenRank1Image"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="40px"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:id="@+id/womanRank1ScoreLabel"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="150px"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_marginLeft="370px"
+                android:text="100"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/womenRank2"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="120px"
+                android:layout_width="104px"
+                android:layout_height="104px"
+                android:background="@drawable/rank2"
+                android:layout_marginLeft="200px" />
+
+            <ImageView
+                android:id="@+id/womenRank2Image"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="130px"
+                android:layout_width="85px"
+                android:layout_height="85px"
+                android:layout_marginLeft="210px"
+                android:background="@drawable/circle"/>
+            <TextView
+                android:id="@+id/womanRank2ScoreLabel"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="200px"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_marginLeft="255px"
+                android:text="100"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/womenRank3"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="150px"
+                android:layout_width="82px"
+                android:layout_height="82px"
+                android:background="@drawable/rank3"
+                android:layout_marginLeft="510px" />
+
+            <ImageView
+                android:id="@+id/womenRank3Image"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="157px"
+                android:layout_width="68px"
+                android:layout_height="68px"
+                android:layout_marginLeft="518px"
+                android:background="@drawable/circle"/>
+            <TextView
+                android:id="@+id/womanRank3ScoreLabel"
+                android:layout_below="@+id/rankTitleBack"
+                android:layout_marginTop="210px"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_marginLeft="495px"
+                android:text="100"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward1Image"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/rostram"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/rankbar" />
+            <ImageView
+                android:id="@+id/womanReward1ProcessBar"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/rostram"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/processbar" />
+            <TextView
+                android:id="@+id/womanRank1Score"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_alignTop="@id/womanReward1ProcessBar"
+                android:layout_marginTop="-20px"
+                android:layout_alignRight="@id/womanReward1ProcessBar"
+                android:textColor="#FFFFFF"
+                android:text=""
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward1"
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:layout_below="@id/rostram"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:background="@drawable/rankimage"/>
+
+            <ImageView
+                android:id="@+id/womenReward1head"
+                android:layout_gravity="center"
+                android:layout_below="@id/rostram"
+                android:layout_marginLeft="65px"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/circle"/>
+
+            <ImageView
+                android:id="@+id/reward2Image"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward1Image"
+                android:layout_marginTop= "50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/rankbar" />
+            <ImageView
+                android:id="@+id/womanReward2ProcessBar"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward1Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/processbar" />
+            <TextView
+                android:id="@+id/womanRank2Score"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_alignTop="@id/womanReward2ProcessBar"
+                android:layout_marginTop="-20px"
+                android:layout_alignRight="@id/womanReward2ProcessBar"
+                android:textColor="#FFFFFF"
+                android:text=""
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward2"
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:layout_below="@id/reward1"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:background="@drawable/rankimage"/>
+            <ImageView
+                android:id="@+id/womenReward2head"
+                android:layout_gravity="center"
+                android:layout_below="@id/reward1"
+                android:layout_marginLeft="65px"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/circle"/>
+
+            <ImageView
+                android:id="@+id/reward3Image"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward2Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/rankbar" />
+            <ImageView
+                android:id="@+id/womanReward3ProcessBar"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward2Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/processbar" />
+            <TextView
+                android:id="@+id/womanRank3Score"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_alignTop="@id/womanReward3ProcessBar"
+                android:layout_marginTop="-20px"
+                android:layout_alignRight="@id/womanReward3ProcessBar"
+                android:textColor="#FFFFFF"
+                android:text=""
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward3"
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:layout_below="@id/reward2"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:background="@drawable/rankimage"/>
+            <ImageView
+                android:id="@+id/womenReward3head"
+                android:layout_gravity="center"
+                android:layout_below="@id/reward2"
+                android:layout_marginLeft="65px"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/circle"/>
+
+            <ImageView
+                android:id="@+id/reward4Image"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward3Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/rankbar" />
+            <ImageView
+                android:id="@+id/womanReward4ProcessBar"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward3Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/processbar" />
+            <TextView
+                android:id="@+id/womanRank4Score"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_alignTop="@id/womanReward4ProcessBar"
+                android:layout_marginTop="-20px"
+                android:layout_alignRight="@id/womanReward4ProcessBar"
+                android:textColor="#FFFFFF"
+                android:text=""
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward4"
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:layout_below="@id/reward3"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:background="@drawable/rankimage"/>
+            <ImageView
+                android:id="@+id/womenReward4head"
+                android:layout_gravity="center"
+                android:layout_below="@id/reward3"
+                android:layout_marginLeft="65px"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/circle"/>
+
+            <ImageView
+                android:id="@+id/reward5Image"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward4Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/rankbar" />
+            <ImageView
+                android:id="@+id/womanReward5ProcessBar"
+                android:layout_width="628px"
+                android:layout_height="70px"
+                android:layout_below="@id/reward4Image"
+                android:layout_marginTop="50px"
+                android:layout_marginLeft="120px"
+                android:background="@drawable/processbar" />
+            <TextView
+                android:id="@+id/womanRank5Score"
+                android:layout_width="100px"
+                android:layout_height="80px"
+                android:layout_alignTop="@id/womanReward5ProcessBar"
+                android:layout_marginTop="-20px"
+                android:layout_alignRight="@id/womanReward5ProcessBar"
+                android:textColor="#FFFFFF"
+                android:text=""
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:id="@+id/reward5"
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:layout_below="@id/reward4"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:background="@drawable/rankimage"/>
+            <ImageView
+                android:id="@+id/womenReward5head"
+                android:layout_gravity="center"
+                android:layout_below="@id/reward4"
+                android:layout_marginLeft="65px"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/circle"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
