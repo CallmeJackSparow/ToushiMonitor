@@ -171,8 +171,10 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void run() {
 //                if (mIndex < 180) {
-//                    mBack1View.setRotation(mIndex * -2);
-//                    mBack2View.setRotation(mIndex * 2);
+//                    if (mMainLayout.getVisibility() == View.VISIBLE) { //只有当主界面1存在时才会走该分支
+//                        mBack1View.setRotation(mIndex * -2);
+//                        mBack2View.setRotation(mIndex * 2);
+//                    }
 //                    mIndex++;
 //                }
 //                else {
@@ -365,10 +367,12 @@ public class MainActivity extends AppCompatActivity {
 
     //扫描人像
     public void ScanFigure(String faceinfo) {
-        mSurfaceView.setVisibility(View.INVISIBLE);
-        mFigureView.setVisibility(View.VISIBLE);
+
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image/face.jpg";
         mFigureView.setImageBitmap(handleBitmap.GetNormalBitmap(path));
+
+        mFigureView.setVisibility(View.VISIBLE);
+        mSurfaceView.setVisibility(View.VISIBLE);
 
         SetUserCount();
 

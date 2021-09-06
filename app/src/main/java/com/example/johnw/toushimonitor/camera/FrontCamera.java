@@ -155,7 +155,8 @@ public class FrontCamera {
         else
         {
             // back-facing
-            result = (info.orientation - degrees + 360) % 360;
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
         }
         camera.setDisplayOrientation(result);
     }

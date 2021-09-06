@@ -89,8 +89,8 @@ public class FaceTask extends AsyncTask<String, Void, String>{
         }
         Camera.Parameters parameters = mCamera.getParameters();
         int imageFormat = parameters.getPreviewFormat();
-        int w = parameters.getPreviewSize().width;
-        int h = parameters.getPreviewSize().height;
+        int w = parameters.getPreviewSize().height;
+        int h = parameters.getPreviewSize().width;
 
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image";
 
@@ -102,6 +102,8 @@ public class FaceTask extends AsyncTask<String, Void, String>{
             yuvImg.compressToJpeg(rect, 50, bos);
             bos.flush();
             bos.close();
+
+
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             Bitmap rawbitmap = BitmapFactory.decodeFile(path + "/face.jpg");

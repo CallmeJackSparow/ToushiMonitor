@@ -121,7 +121,7 @@
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="370px"
-                android:text="100"
+                android:text=""
                 android:textSize="20dp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
@@ -150,7 +150,7 @@
                 android:layout_width="100px"
                 android:layout_height="80px"
                 android:layout_marginLeft="255px"
-                android:text="100"
+                android:text=""
                 android:textSize="15dp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
@@ -179,7 +179,7 @@
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="495px"
-                android:text="100"
+                android:text=""
                 android:textSize="15dp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>

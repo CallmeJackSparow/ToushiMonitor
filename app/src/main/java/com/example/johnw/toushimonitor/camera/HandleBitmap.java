@@ -66,13 +66,13 @@ public class HandleBitmap {
         bitmap = BitmapFactory.decodeFile(pImagePath, options);
 
         try {
-            Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getHeight(), bitmap.getHeight(),
+            Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getWidth(),
                     Bitmap.Config.ARGB_8888);
 
             Canvas canvas = new Canvas(circleBitmap);
             final Paint paint = new Paint();
-            final Rect rect = new Rect(0, 0, bitmap.getHeight(), bitmap.getHeight());
-            final RectF rectF = new RectF(new Rect(0,0,bitmap.getHeight(), bitmap.getHeight()));
+            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getWidth());
+            final RectF rectF = new RectF(new Rect(0,0,bitmap.getWidth(), bitmap.getWidth()));
             float roundPx = 0.0f;
             roundPx = bitmap.getHeight();
             paint.setAntiAlias(true);
@@ -80,7 +80,7 @@ public class HandleBitmap {
             paint.setColor(Color.WHITE);
             canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-            final Rect src = new Rect(0,0,bitmap.getHeight(), bitmap.getHeight());
+            final Rect src = new Rect(0,0,bitmap.getWidth(), bitmap.getWidth());
             canvas.drawBitmap(bitmap, src, rect, paint);
             return circleBitmap;
         } catch (Exception e) {
