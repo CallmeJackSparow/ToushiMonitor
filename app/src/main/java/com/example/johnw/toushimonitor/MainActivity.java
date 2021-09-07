@@ -166,30 +166,30 @@ public class MainActivity extends AppCompatActivity {
 
         mSettingButton = (Button) findViewById(R.id.btnSettings);
 
-//        mTimer = new Timer();
-//        mTimerTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (mIndex < 180) {
-//                    if (mMainLayout.getVisibility() == View.VISIBLE) { //只有当主界面1存在时才会走该分支
-//                        mBack1View.setRotation(mIndex * -2);
-//                        mBack2View.setRotation(mIndex * 2);
-//                    }
-//                    mIndex++;
-//                }
-//                else {
-//                    mIndex = 0;
-//                }
-//
-//                if (mPlayIndex != -1) {
-//                    if (mPlayIndex - mIndex == -60 || mPlayIndex - mIndex == 60) {
-//                        ChangeActivity();
-//                        mPlayIndex = -1;
-//                    }
-//                }
-//            }
-//        };
-//        mTimer.schedule(mTimerTask, 0, 100);
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (mIndex < 180) {
+                    if (mMainLayout.getVisibility() == View.VISIBLE) { //只有当主界面1存在时才会走该分支
+                        mBack1View.setRotation(mIndex * -2);
+                        mBack2View.setRotation(mIndex * 2);
+                    }
+                    mIndex++;
+                }
+                else {
+                    mIndex = 0;
+                }
+
+                if (mPlayIndex != -1) {
+                    if (mPlayIndex - mIndex == -60 || mPlayIndex - mIndex == 60) {
+                        ChangeActivity();
+                        mPlayIndex = -1;
+                    }
+                }
+            }
+        };
+        mTimer.schedule(mTimerTask, 0, 100);
     }
 
     //Android11申请权限

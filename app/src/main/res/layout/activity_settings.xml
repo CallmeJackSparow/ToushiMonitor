@@ -9,13 +9,12 @@
     <TextView
         android:id="@+id/settingTitle"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="150px"
         android:text="设置"
         android:textColor="#000000"
-        android:textSize="50px"
+        android:textSize="25dp"
         android:textAlignment="center"
         android:background="#FFFFFF"
-        android:layout_centerHorizontal="true"
         android:fontFamily="@font/sourcehansans"/>
 
     <LinearLayout
@@ -43,12 +42,14 @@
                 android:textSize="50px"
                 android:layout_gravity="center"
                 android:fontFamily="@font/sourcehansans"/>
+
             <Button
                 android:id="@+id/btn_deviceId"
                 android:layout_width="match_parent"
                 android:layout_height="150px"
                 android:layout_marginTop="-40px"
                 android:background="#00000000"/>
+
             <ImageView
                 android:layout_marginLeft="900px"
                 android:layout_width="38px"
@@ -84,7 +85,7 @@
                 android:background="@drawable/select"/>
 
             <Button
-                android:id="@+id/btnLogoPath"
+                android:id="@+id/btn_logoPath"
                 android:layout_width="match_parent"
                 android:layout_height="150px"
                 android:layout_marginTop="-40px"
@@ -112,20 +113,6 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/sourcehansans"/>
 
-<!--            <EditText-->
-<!--                android:id="@+id/qrCodePath"-->
-<!--                android:layout_width="680px"-->
-<!--                android:layout_height="100px"-->
-<!--                android:text="null"-->
-<!--                android:textColor="#000000"-->
-<!--                android:textSize="50px"-->
-<!--                android:fontFamily="@font/sourcehansans"-->
-<!--                android:singleLine="true"-->
-<!--                android:gravity="right"-->
-<!--                android:cursorVisible="false"-->
-<!--                android:focusable="false"-->
-<!--                android:textIsSelectable="false"/>-->
-
             <ImageView
                 android:layout_width="38px"
                 android:layout_height="68px"
@@ -134,7 +121,7 @@
                 android:background="@drawable/select"/>
 
             <Button
-                android:id="@+id/btnQrCodePath"
+                android:id="@+id/btn_qrCodePath"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00000000"/>
@@ -166,7 +153,39 @@
                 android:background="@drawable/select"/>
 
             <Button
-                android:id="@+id/btnFirstpage"
+                android:id="@+id/btn_ShowInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/mid_layout"
+            android:id="@+id/photoOritationLayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10px"
+            android:layout_height="150px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="300px"
+                android:layout_height="200px"
+                android:layout_marginTop="-40px"
+                android:text="图片角度矫正"
+                android:textColor="#000000"
+                android:textSize="50px"
+                android:fontFamily="@font/sourcehansans"/>
+
+            <ImageView
+                android:layout_width="38px"
+                android:layout_height="68px"
+                android:layout_marginLeft="900px"
+                android:layout_gravity="center"
+                android:background="@drawable/select"/>
+
+            <Button
+                android:id="@+id/btn_photoDegree"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00000000"/>
@@ -207,44 +226,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
-
-
-
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/mode"-->
-<!--        android:layout_marginTop="0px"-->
-<!--        android:layout_marginLeft="20px"-->
-<!--        android:layout_width="250px"-->
-<!--        android:layout_height="100px"-->
-<!--        android:text="人数"-->
-<!--        android:textColor="#000000"-->
-<!--        android:textSize="50px"-->
-<!--        android:fontFamily="@font/sourcehansans"/>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/modeCount"-->
-<!--        android:layout_marginTop="0px"-->
-<!--        android:layout_marginLeft="320px"-->
-<!--        android:layout_width="680px"-->
-<!--        android:layout_height="100px"-->
-<!--        android:text="null"-->
-<!--        android:textColor="#000000"-->
-<!--        android:textSize="50px"-->
-<!--        android:fontFamily="@font/sourcehansans"-->
-<!--        android:singleLine="true"-->
-<!--        android:gravity="right"/>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnMode"-->
-<!--        android:layout_marginTop="0px"-->
-<!--        android:layout_marginLeft="320px"-->
-<!--        android:layout_width="680px"-->
-<!--        android:layout_height="100px"-->
-<!--        android:background="#0000"/>-->
-
-
 </RelativeLayout>

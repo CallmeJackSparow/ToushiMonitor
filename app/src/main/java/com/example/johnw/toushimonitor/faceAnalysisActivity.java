@@ -115,17 +115,6 @@ public class faceAnalysisActivity extends Activity {
             int manRank4Score = sharedPreferences.getInt("manRank4", 0);
             int manRank5Score = sharedPreferences.getInt("manRank5", 0);
 
-//            Set<String> manScore = sharedPreferences.getStringSet("manScore",null);
-//            ArrayList<String> scoreList = new ArrayList<String>(manScore);
-//            for (int i = 0; i < scoreList.size(); i++) {
-//                if (Integer.parseInt(scoreList.get(i)) <= mBeautyScore) {
-//                    mCurrentRank = i;
-//                    scoreList.add(i, String.valueOf(mBeautyScore));
-//                }
-//            }
-//            Set<String> newScoreList = new HashSet<String>(scoreList);
-//            editor.putStringSet("manScore", newScoreList);
-
             if (mBeautyScore >= manRank1Score) {
                 editor.putInt("manRank5", manRank4Score);
                 editor.putInt("manRank4", manRank3Score);
@@ -439,15 +428,11 @@ public class faceAnalysisActivity extends Activity {
     }
 
     private void ChangeToRank() {
-        mTimer.cancel();
-        mTimerTask.cancel();
         Intent intent;
         //Toast.makeText(faceAnalysisActivity.this, String.valueOf(mSex),Toast.LENGTH_SHORT).show();
         if (mSex == 0) { //进入男神版
-            //Toast.makeText(faceAnalysisActivity.this, "男神版",Toast.LENGTH_SHORT).show();
             intent = new Intent(faceAnalysisActivity.this, MenGodRankActivity.class);
         } else { //进入女神版
-            //Toast.makeText(faceAnalysisActivity.this, "女神版",Toast.LENGTH_SHORT).show();
             intent = new Intent(faceAnalysisActivity.this, WomenGodRankActivity.class);
         }
         startActivity(intent);

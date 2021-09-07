@@ -106,8 +106,8 @@ public class QRCodeActivity extends AppCompatActivity {
     };
 
     public void ChangeActivity() {
-        mTimer.cancel();
-        mTimerTask.cancel();
+//        mTimer.cancel();
+//        mTimerTask.cancel();
         Intent intent = new Intent(QRCodeActivity.this, MainActivity.class);
         startActivity(intent);
     }

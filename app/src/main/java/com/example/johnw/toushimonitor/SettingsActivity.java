@@ -18,11 +18,14 @@ import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button mLogoPath;
-    private Button mQrImagePath;
-    private Button mBtnBack;
     private Button mBtnDeviceId;
-    private Button mBtnPage1Info;
+    private Button mBtnLogoPath;
+    private Button mBtnQrImagePath;
+    private Button mBtnShowInfo;
+    private Button mBtnChangeDegree;
+    private Button mBtnBack;
+
+
 
     boolean mButtonType = false;
     @Override
@@ -32,8 +35,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
         String deviceId = sharedPreferences.getString("DeviceId", "1");
+        int rotatedegree = sharedPreferences.getInt("PhotoDegree", 90);
 
-        mBtnDeviceId = (Button) findViewById(R.id.btn_deviceId);
+        mBtnDeviceId = (Button) findViewById(R.id.btn_deviceId); //设备id
+        mBtnLogoPath = (Button) findViewById(R.id.btn_logoPath); //图标路径
+        mBtnQrImagePath = (Button) findViewById(R.id.btn_qrCodePath); //二维码路径
+        mBtnShowInfo = (Button) findViewById(R.id.btn_ShowInfo); //首页展示信息
+        mBtnChangeDegree = (Button) findViewById(R.id.btn_photoDegree); //修正图片的角度
+        mBtnBack = (Button) findViewById(R.id.btn_setting_back); //返回
+
         mBtnDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +73,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        mLogoPath = (Button) findViewById(R.id.btnLogoPath);
-        mLogoPath.setOnClickListener(new View.OnClickListener() {
+        mBtnLogoPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mButtonType = true;
@@ -75,8 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        mQrImagePath = (Button) findViewById(R.id.btnQrCodePath);
-        mQrImagePath.setOnClickListener(new View.OnClickListener() {
+        mBtnQrImagePath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mButtonType = false;
@@ -87,8 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        mBtnPage1Info = (Button) findViewById(R.id.btnFirstpage);
-        mBtnPage1Info.setOnClickListener(new View.OnClickListener() {
+        mBtnShowInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String titleText = sharedPreferences.getString("titleText", "颜值机");
@@ -141,6 +148,34 @@ public class SettingsActivity extends AppCompatActivity {
 
                         editor.apply();
 
+                        builder.setCancelable(true);
+                    }
+                });
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        builder.setCancelable(false);
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        mBtnChangeDegree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("输入图片旋转角度");
+                builder.setIcon(R.drawable.ic_launcher_foreground);
+                EditText edtId = new EditText(SettingsActivity.this);
+                edtId.setText(Integer.toString(rotatedegree));
+                builder.setView(edtId);
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("PhotoDegree", Integer.parseInt(edtId.getText().toString()));
+                        editor.apply();
                         builder.setCancelable(true);
                     }
                 });

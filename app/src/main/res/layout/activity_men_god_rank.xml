@@ -69,7 +69,6 @@
             android:background="@drawable/popupwindow"
             android:layout_gravity="center">
 
-
             <ImageView
                 android:id="@+id/rankTitleBack"
                 android:layout_width="560px"

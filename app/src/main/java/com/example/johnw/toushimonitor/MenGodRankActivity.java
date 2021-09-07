@@ -57,6 +57,12 @@ public class MenGodRankActivity extends AppCompatActivity {
     private TextView mRank4Score;
     private TextView mRank5Score;
 
+    private int mRank1;
+    private int mRank2;
+    private int mRank3;
+    private int mRank4;
+    private int mRank5;
+
     int mDeviceId;
     String mFileUrl = "";
 
@@ -74,11 +80,11 @@ public class MenGodRankActivity extends AppCompatActivity {
         int mCount = sharedPreferences.getInt("count", 0);
         mDeviceId = sharedPreferences.getInt("deviceId",1);
 
-        int mRank1 = sharedPreferences.getInt("manRank1", 0);
-        int mRank2 = sharedPreferences.getInt("manRank2", 0);
-        int mRank3 = sharedPreferences.getInt("manRank3", 0);
-        int mRank4 = sharedPreferences.getInt("manRank4", 0);
-        int mRank5 = sharedPreferences.getInt("manRank5", 0);
+        mRank1 = sharedPreferences.getInt("manRank1", 0);
+        mRank2 = sharedPreferences.getInt("manRank2", 0);
+        mRank3 = sharedPreferences.getInt("manRank3", 0);
+        mRank4 = sharedPreferences.getInt("manRank4", 0);
+        mRank5 = sharedPreferences.getInt("manRank5", 0);
 
         TextView totalPeopleCount = (TextView) findViewById(R.id.totalNum2);
         totalPeopleCount.setText(String.valueOf(mCount));
@@ -105,23 +111,101 @@ public class MenGodRankActivity extends AppCompatActivity {
         mReward4ProgreessBar = (ImageView) findViewById(R.id.manReward4ProcessBar);
         mReward5ProgreessBar = (ImageView) findViewById(R.id.manReward5ProcessBar);
 
+
+        String rank1Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank1.jpg";
+        String rank2Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank2.jpg";
+        String rank3Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank3.jpg";
+        String rank4Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank4.jpg";
+        String rank5Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank5.jpg";
+        Bitmap rank1bitmap = handleBitmap.getBitmap(rank1Image);
+        Bitmap rank2bitmap = handleBitmap.getBitmap(rank2Image);
+        Bitmap rank3bitmap = handleBitmap.getBitmap(rank3Image);
+        Bitmap rank4bitmap = handleBitmap.getBitmap(rank4Image);
+        Bitmap rank5bitmap = handleBitmap.getBitmap(rank5Image);
+
+        mRank1Head.setImageBitmap(rank1bitmap);
+        mRank1Head.setRotation(270);
+        mRank2Head.setImageBitmap(rank2bitmap);
+        mRank2Head.setRotation(270);
+        mRank3Head.setImageBitmap(rank3bitmap);
+        mRank3Head.setRotation(270);
+
+        mReward1Head.setImageBitmap(rank1bitmap);
+        mReward1Head.setRotation(270);
+        mReward2Head.setImageBitmap(rank2bitmap);
+        mReward2Head.setRotation(270);
+        mReward3Head.setImageBitmap(rank3bitmap);
+        mReward3Head.setRotation(270);
+        mReward4Head.setImageBitmap(rank4bitmap);
+        mReward4Head.setRotation(270);
+        mReward5Head.setImageBitmap(rank5bitmap);
+        mReward5Head.setRotation(270);
+
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (mIndex == 10) { //进入该界面3s之后,通过网络获取二维码
+                    mFileUrl = handleBitmap.GetQR(mDeviceId);
+                    String path = getExternalFilesDir(null).getAbsolutePath()  + "/image/";
+                    File saveFile = new File(path, "qrString.txt");
+                    FileOutputStream outputStream1 = null;
+                    try {
+                        outputStream1 = new FileOutputStream(saveFile);
+                        outputStream1.write(mFileUrl.getBytes("GBK"));
+                        outputStream1.close();
+                        outputStream1.flush();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                    Bitmap bitmap = handleBitmap.GetNetworkBitmap(mFileUrl);
+                    String qrPath = getExternalFilesDir(null).getAbsolutePath() + "/image/qrImage.jpg";
+                    try {
+                        File file = new File(qrPath);
+                        FileOutputStream out = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                        out.flush();
+                        out.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if (mIndex == 70) {
+                    ChangeToQR();
+                }
+
+                if (mIndex >= 5 && mIndex < 15) {
+                    ShowProgressBar(10 - mIndex);
+                }
+
+                mIndex++;
+            }
+        };
+        mTimer.schedule(mTimerTask, 0, 100);
+    }
+
+    public void ShowProgressBar(int rate) {
         ViewGroup.LayoutParams params;
         params = mReward1ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank1 / 100;
+        params.width = params.width * mRank1 * rate / 1000;
         mReward1ProgreessBar.setLayoutParams(params);
         params = mReward2ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank2 / 100;
+        params.width = params.width * mRank2 * rate / 1000;
         mReward2ProgreessBar.setLayoutParams(params);
         params = mReward3ProgreessBar.getLayoutParams();
-        params.width = params.width  * mRank3 / 100;
+        params.width = params.width  * mRank3 * rate / 1000;
         mReward3ProgreessBar.setLayoutParams(params);
         params = mReward4ProgreessBar.getLayoutParams();
-        params.width = params.width  * mRank4 / 100;
+        params.width = params.width  * mRank4 * rate / 1000;
         mReward4ProgreessBar.setLayoutParams(params);
         params = mReward5ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank5 / 100;
+        params.width = params.width * mRank5 * rate / 1000;
         mReward5ProgreessBar.setLayoutParams(params);
+    }
 
+    public void ShowScore() {
         mRank1Score = (TextView) findViewById(R.id.manRank1Score);
         mRank2Score = (TextView) findViewById(R.id.manRank2Score);
         mRank3Score = (TextView) findViewById(R.id.manRank3Score);
@@ -158,80 +242,12 @@ public class MenGodRankActivity extends AppCompatActivity {
         } else {
             mRank5Score.setText("100");
         }
-
-        String rank1Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank1.jpg";
-        String rank2Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank2.jpg";
-        String rank3Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank3.jpg";
-        String rank4Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank4.jpg";
-        String rank5Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank5.jpg";
-        Bitmap rank1bitmap = handleBitmap.getBitmap(rank1Image);
-        Bitmap rank2bitmap = handleBitmap.getBitmap(rank2Image);
-        Bitmap rank3bitmap = handleBitmap.getBitmap(rank3Image);
-        Bitmap rank4bitmap = handleBitmap.getBitmap(rank4Image);
-        Bitmap rank5bitmap = handleBitmap.getBitmap(rank5Image);
-
-        mRank1Head.setImageBitmap(rank1bitmap);
-        mRank1Head.setRotation(270);
-        mRank2Head.setImageBitmap(rank2bitmap);
-        mRank2Head.setRotation(270);
-        mRank3Head.setImageBitmap(rank3bitmap);
-        mRank3Head.setRotation(270);
-
-        mReward1Head.setImageBitmap(rank1bitmap);
-        mReward1Head.setRotation(270);
-        mReward2Head.setImageBitmap(rank2bitmap);
-        mReward2Head.setRotation(270);
-        mReward3Head.setImageBitmap(rank3bitmap);
-        mReward3Head.setRotation(270);
-        mReward4Head.setImageBitmap(rank4bitmap);
-        mReward4Head.setRotation(270);
-        mReward5Head.setImageBitmap(rank5bitmap);
-        mReward5Head.setRotation(270);
-
-        mTimer = new Timer();
-        mTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                if (mIndex == 1) { //进入该界面3s之后,通过网络获取二维码
-                    mFileUrl = handleBitmap.GetQR(mDeviceId);
-                    String path = getExternalFilesDir(null).getAbsolutePath()  + "/image/";
-                    File saveFile = new File(path, "qrString.txt");
-                    FileOutputStream outputStream1 = null;
-                    try {
-                        outputStream1 = new FileOutputStream(saveFile);
-                        outputStream1.write(mFileUrl.getBytes("GBK"));
-                        outputStream1.close();
-                        outputStream1.flush();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                    Bitmap bitmap = handleBitmap.GetNetworkBitmap(mFileUrl);
-                    String qrPath = getExternalFilesDir(null).getAbsolutePath() + "/image/qrImage.jpg";
-                    try {
-                        File file = new File(qrPath);
-                        FileOutputStream out = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                        out.flush();
-                        out.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                if (mIndex == 7) {
-                    ChangeToQR();
-                }
-                mIndex++;
-            }
-        };
-        mTimer.schedule(mTimerTask, 0, 1000);
     }
 
 
     public void ChangeToQR() {
-        mTimer.cancel();
-        mTimerTask.cancel();
+//        mTimer.cancel();
+//        mTimerTask.cancel();
         Intent intent = new Intent(MenGodRankActivity.this, QRCodeActivity.class);
         startActivity(intent);
     }
