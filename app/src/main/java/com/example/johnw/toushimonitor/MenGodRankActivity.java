@@ -1,5 +1,6 @@
 package com.example.johnw.toushimonitor;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,10 +23,12 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MenGodRankActivity extends AppCompatActivity {
 
@@ -62,6 +66,13 @@ public class MenGodRankActivity extends AppCompatActivity {
     private int mRank3;
     private int mRank4;
     private int mRank5;
+    ViewGroup.LayoutParams mParams1;
+    ViewGroup.LayoutParams mParams2;
+    ViewGroup.LayoutParams mParams3;
+    ViewGroup.LayoutParams mParams4;
+    ViewGroup.LayoutParams mParams5;
+
+    private int mProgressBarLength;
 
     int mDeviceId;
     String mFileUrl = "";
@@ -111,6 +122,33 @@ public class MenGodRankActivity extends AppCompatActivity {
         mReward4ProgreessBar = (ImageView) findViewById(R.id.manReward4ProcessBar);
         mReward5ProgreessBar = (ImageView) findViewById(R.id.manReward5ProcessBar);
 
+        float num1 = mRank1 / (float)100;
+        float num2 = mRank2 / (float)100;
+        float num3 = mRank3 / (float)100;
+        float num4 = mRank4 / (float)100;
+        float num5 = mRank5 / (float)100;
+        ScaleAnimation scaleAnimation1 = new ScaleAnimation(0, num1, 1, 1);
+        ScaleAnimation scaleAnimation2 = new ScaleAnimation(0, num2, 1, 1);
+        ScaleAnimation scaleAnimation3 = new ScaleAnimation(0, num3, 1, 1);
+        ScaleAnimation scaleAnimation4 = new ScaleAnimation(0, num4, 1, 1);
+        ScaleAnimation scaleAnimation5 = new ScaleAnimation(0, num5, 1, 1);
+        scaleAnimation1.setFillAfter(true);
+        scaleAnimation2.setFillAfter(true);
+        scaleAnimation3.setFillAfter(true);
+        scaleAnimation4.setFillAfter(true);
+        scaleAnimation5.setFillAfter(true);
+        scaleAnimation1.setDuration(1000);
+        scaleAnimation2.setDuration(1000);
+        scaleAnimation3.setDuration(1000);
+        scaleAnimation4.setDuration(1000);
+        scaleAnimation5.setDuration(1000);
+        mReward1ProgreessBar.startAnimation(scaleAnimation1);
+        mReward2ProgreessBar.startAnimation(scaleAnimation2);
+        mReward3ProgreessBar.startAnimation(scaleAnimation3);
+        mReward4ProgreessBar.startAnimation(scaleAnimation4);
+        mReward5ProgreessBar.startAnimation(scaleAnimation5);
+
+        ShowScore();
 
         String rank1Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank1.jpg";
         String rank2Image = getExternalFilesDir(null).getAbsolutePath() + "/image/man/rank2.jpg";
@@ -122,87 +160,27 @@ public class MenGodRankActivity extends AppCompatActivity {
         Bitmap rank3bitmap = handleBitmap.getBitmap(rank3Image);
         Bitmap rank4bitmap = handleBitmap.getBitmap(rank4Image);
         Bitmap rank5bitmap = handleBitmap.getBitmap(rank5Image);
-
         mRank1Head.setImageBitmap(rank1bitmap);
-        mRank1Head.setRotation(270);
         mRank2Head.setImageBitmap(rank2bitmap);
-        mRank2Head.setRotation(270);
         mRank3Head.setImageBitmap(rank3bitmap);
-        mRank3Head.setRotation(270);
 
         mReward1Head.setImageBitmap(rank1bitmap);
-        mReward1Head.setRotation(270);
         mReward2Head.setImageBitmap(rank2bitmap);
-        mReward2Head.setRotation(270);
         mReward3Head.setImageBitmap(rank3bitmap);
-        mReward3Head.setRotation(270);
         mReward4Head.setImageBitmap(rank4bitmap);
-        mReward4Head.setRotation(270);
         mReward5Head.setImageBitmap(rank5bitmap);
-        mReward5Head.setRotation(270);
 
         mTimer = new Timer();
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                if (mIndex == 10) { //进入该界面3s之后,通过网络获取二维码
-                    mFileUrl = handleBitmap.GetQR(mDeviceId);
-                    String path = getExternalFilesDir(null).getAbsolutePath()  + "/image/";
-                    File saveFile = new File(path, "qrString.txt");
-                    FileOutputStream outputStream1 = null;
-                    try {
-                        outputStream1 = new FileOutputStream(saveFile);
-                        outputStream1.write(mFileUrl.getBytes("GBK"));
-                        outputStream1.close();
-                        outputStream1.flush();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                    Bitmap bitmap = handleBitmap.GetNetworkBitmap(mFileUrl);
-                    String qrPath = getExternalFilesDir(null).getAbsolutePath() + "/image/qrImage.jpg";
-                    try {
-                        File file = new File(qrPath);
-                        FileOutputStream out = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                        out.flush();
-                        out.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                if (mIndex == 70) {
+                if (mIndex == 8) {
                     ChangeToQR();
                 }
-
-                if (mIndex >= 5 && mIndex < 15) {
-                    ShowProgressBar(10 - mIndex);
-                }
-
                 mIndex++;
             }
         };
-        mTimer.schedule(mTimerTask, 0, 100);
-    }
-
-    public void ShowProgressBar(int rate) {
-        ViewGroup.LayoutParams params;
-        params = mReward1ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank1 * rate / 1000;
-        mReward1ProgreessBar.setLayoutParams(params);
-        params = mReward2ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank2 * rate / 1000;
-        mReward2ProgreessBar.setLayoutParams(params);
-        params = mReward3ProgreessBar.getLayoutParams();
-        params.width = params.width  * mRank3 * rate / 1000;
-        mReward3ProgreessBar.setLayoutParams(params);
-        params = mReward4ProgreessBar.getLayoutParams();
-        params.width = params.width  * mRank4 * rate / 1000;
-        mReward4ProgreessBar.setLayoutParams(params);
-        params = mReward5ProgreessBar.getLayoutParams();
-        params.width = params.width * mRank5 * rate / 1000;
-        mReward5ProgreessBar.setLayoutParams(params);
+        mTimer.schedule(mTimerTask, 0, 1000);
     }
 
     public void ShowScore() {
@@ -211,37 +189,19 @@ public class MenGodRankActivity extends AppCompatActivity {
         mRank3Score = (TextView) findViewById(R.id.manRank3Score);
         mRank4Score = (TextView) findViewById(R.id.manRank4Score);
         mRank5Score = (TextView) findViewById(R.id.manRank5Score);
-        if (mRank1 > 0 && mRank1 < 100) {
-            mRank1Score.setText(String.valueOf(mRank1));
-            mRank1LabelScore.setText(String.valueOf(mRank1));
-        } else {
-            mRank1Score.setText("100");
-            mRank1LabelScore.setText("100");
-        }
-        if (mRank2 > 0 && mRank2 < 100) {
-            mRank2Score.setText(String.valueOf(mRank2));
-            mRank2LabelScore.setText(String.valueOf(mRank2));
-        } else {
-            mRank2Score.setText("100");
-            mRank2LabelScore.setText("100");
-        }
-        if (mRank3 > 0 && mRank3 < 100) {
-            mRank3Score.setText(String.valueOf(mRank3));
-            mRank3LabelScore.setText(String.valueOf(mRank3));
-        } else {
-            mRank3Score.setText("100");
-            mRank3LabelScore.setText("100");
-        }
-        if (mRank4 > 0 && mRank4 < 100) {
-            mRank4Score.setText(String.valueOf(mRank4));
-        } else {
-            mRank4Score.setText("100");
-        }
-        if (mRank5 > 0 && mRank5 < 100) {
-            mRank5Score.setText(String.valueOf(mRank5));
-        } else {
-            mRank5Score.setText("100");
-        }
+
+        mRank1Score.setText(String.valueOf(mRank1));
+        mRank1LabelScore.setText(String.valueOf(mRank1));
+
+        mRank2Score.setText(String.valueOf(mRank2));
+        mRank2LabelScore.setText(String.valueOf(mRank2));
+
+        mRank3Score.setText(String.valueOf(mRank3));
+        mRank3LabelScore.setText(String.valueOf(mRank3));
+
+        mRank4Score.setText(String.valueOf(mRank4));
+
+        mRank5Score.setText(String.valueOf(mRank5));
     }
 
 

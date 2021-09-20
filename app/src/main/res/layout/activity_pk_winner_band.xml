@@ -7,7 +7,7 @@
     android:background="@drawable/background">
 
     <LinearLayout
-        android:id="@+id/totalTitleLayout"
+        android:id="@+id/roundLayout"
         android:layout_width="478px"
         android:layout_height="234px"
         android:layout_centerHorizontal="true"
@@ -15,23 +15,23 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/pkRoundTitle"
             android:layout_width="478px"
             android:layout_height="120px"
             android:layout_centerHorizontal="true"
-            android:text="总人数"
+            android:text="PK轮次"
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="50px"
             android:fontFamily="@font/sourcehansans"/>
 
         <TextView
-            android:id="@+id/pkTotalNum"
+            android:id="@+id/pkRoundNum"
             android:layout_width="478px"
             android:layout_height="100px"
             android:layout_marginTop="0px"
             android:layout_centerHorizontal="true"
-            android:text="100"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="50px"
@@ -69,19 +69,18 @@
             android:background="@drawable/popupwindow"
             android:layout_gravity="center">
 
-
             <ImageView
-                android:id="@+id/rankTitleBack"
+                android:id="@+id/pkBandBack"
                 android:layout_width="560px"
                 android:layout_height="120px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/ranktitle"
-                android:layout_marginLeft="60px"/>
+                android:layout_marginLeft="135px"/>
 
             <TextView
                 android:layout_width="560px"
                 android:layout_height="120px"
-                android:layout_marginTop="30px"
+                android:layout_marginTop="20px"
                 android:text="PK榜"
                 android:textColor="#FFFF"
                 android:textSize="50px"
@@ -90,17 +89,17 @@
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/rostram"
-                android:layout_below="@+id/rankTitleBack"
+                android:id="@+id/pkRostram"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="142px"
                 android:layout_width="400px"
                 android:layout_height="158px"
                 android:background="@drawable/rankbackground"
                 android:layout_centerHorizontal="true"/>
-
+            <!--排行榜第1-->
             <ImageView
                 android:id="@+id/pkRank1"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="20px"
                 android:layout_width="142px"
                 android:layout_height="142px"
@@ -109,7 +108,7 @@
 
             <ImageView
                 android:id="@+id/pkRank1Image"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="40px"
                 android:layout_width="100px"
                 android:layout_height="100px"
@@ -118,19 +117,20 @@
 
             <TextView
                 android:id="@+id/pkRank1ScoreLabel"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="170px"
                 android:layout_width="100px"
                 android:layout_height="120px"
                 android:layout_marginLeft="375px"
-                android:text="100"
+                android:text=""
                 android:textSize="55px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
+            <!--排行榜第2-->
             <ImageView
                 android:id="@+id/pkRank2"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="120px"
                 android:layout_width="104px"
                 android:layout_height="104px"
@@ -139,7 +139,7 @@
 
             <ImageView
                 android:id="@+id/pkRank2Image"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="130px"
                 android:layout_width="85px"
                 android:layout_height="85px"
@@ -147,19 +147,20 @@
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/pkRank2ScoreLabel"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="200px"
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="255px"
-                android:text="100"
+                android:text=""
                 android:textSize="45px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
+            <!--排行榜第3-->
             <ImageView
                 android:id="@+id/pkRank3"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="150px"
                 android:layout_width="82px"
                 android:layout_height="82px"
@@ -168,7 +169,7 @@
 
             <ImageView
                 android:id="@+id/pkRank3Image"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="157px"
                 android:layout_width="68px"
                 android:layout_height="68px"
@@ -176,29 +177,30 @@
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/pkRank3ScoreLabel"
-                android:layout_below="@+id/rankTitleBack"
+                android:layout_below="@+id/pkBandBack"
                 android:layout_marginTop="210px"
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="495px"
-                android:text="100"
+                android:text=""
                 android:textSize="40px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
+            <!--滚动条1-->
             <ImageView
-                android:id="@+id/reward1Image"
+                android:id="@+id/pkReward1Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/rostram"
+                android:layout_below="@id/pkRostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/rankbar" />
             <ImageView
-                android:id="@+id/ProcessBar1"
+                android:id="@+id/pkProcessBar1"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/rostram"
+                android:layout_below="@id/pkRostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/processbar" />
@@ -206,45 +208,46 @@
                 android:id="@+id/pkRank1Score"
                 android:layout_width="100px"
                 android:layout_height="80px"
-                android:layout_alignTop="@id/ProcessBar1"
+                android:layout_alignTop="@id/pkProcessBar1"
                 android:layout_marginTop="-20px"
-                android:layout_alignRight="@id/ProcessBar1"
+                android:layout_alignRight="@id/pkProcessBar1"
                 android:textColor="#FFFFFF"
-                android:text="0"
+                android:text=""
                 android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward1"
+                android:id="@+id/pkReward1"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/rostram"
+                android:layout_below="@id/pkRostram"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
                 android:background="@drawable/rankimage"/>
             <ImageView
-                android:id="@+id/reward1head"
+                android:id="@+id/pkReward1head"
                 android:layout_gravity="center"
-                android:layout_below="@id/rostram"
+                android:layout_below="@id/pkRostram"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/circle"/>
 
+            <!--滚动条2-->
             <ImageView
-                android:id="@+id/reward2Image"
+                android:id="@+id/pkReward2Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward1Image"
+                android:layout_below="@id/pkReward1Image"
                 android:layout_marginTop= "50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/rankbar" />
             <ImageView
-                android:id="@+id/ProcessBar2"
+                android:id="@+id/pkProcessBar2"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward1Image"
+                android:layout_below="@id/pkReward1Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/processbar" />
@@ -252,45 +255,46 @@
                 android:id="@+id/pkRank2Score"
                 android:layout_width="100px"
                 android:layout_height="80px"
-                android:layout_alignTop="@id/ProcessBar2"
+                android:layout_alignTop="@id/pkProcessBar2"
                 android:layout_marginTop="-20px"
-                android:layout_alignRight="@id/ProcessBar2"
+                android:layout_alignRight="@id/pkProcessBar2"
                 android:textColor="#FFFFFF"
-                android:text="0"
+                android:text=""
                 android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward2"
+                android:id="@+id/pkReward2"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward1"
+                android:layout_below="@id/pkReward1"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
                 android:background="@drawable/rankimage"/>
             <ImageView
-                android:id="@+id/reward2head"
+                android:id="@+id/pkReward2head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward1"
+                android:layout_below="@id/pkReward1"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/circle"/>
 
+            <!--滚动条3-->
             <ImageView
-                android:id="@+id/reward3Image"
+                android:id="@+id/pkReward3Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward2Image"
+                android:layout_below="@id/pkReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/rankbar" />
             <ImageView
-                android:id="@+id/ProcessBar3"
+                android:id="@+id/pkProcessBar3"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward2Image"
+                android:layout_below="@id/pkReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/processbar" />
@@ -298,46 +302,46 @@
                 android:id="@+id/pkRank3Score"
                 android:layout_width="100px"
                 android:layout_height="80px"
-                android:layout_alignTop="@id/ProcessBar3"
+                android:layout_alignTop="@id/pkProcessBar3"
                 android:layout_marginTop="-20px"
-                android:layout_alignRight="@id/ProcessBar3"
+                android:layout_alignRight="@id/pkProcessBar3"
                 android:textColor="#FFFFFF"
-                android:text="0"
+                android:text=""
                 android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward3"
+                android:id="@+id/pkReward3"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward2"
+                android:layout_below="@id/pkReward2"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
                 android:background="@drawable/rankimage"/>
             <ImageView
-                android:id="@+id/reward3head"
+                android:id="@+id/pkReward3head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward2"
+                android:layout_below="@id/pkReward2"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/circle"/>
 
-
+            <!--排行榜4-->
             <ImageView
-                android:id="@+id/reward4Image"
+                android:id="@+id/pkReward4Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward3Image"
+                android:layout_below="@id/pkReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/rankbar" />
             <ImageView
-                android:id="@+id/ProcessBar4"
+                android:id="@+id/pkProcessBar4"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward3Image"
+                android:layout_below="@id/pkReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/processbar" />
@@ -345,45 +349,46 @@
                 android:id="@+id/pkRank4Score"
                 android:layout_width="100px"
                 android:layout_height="80px"
-                android:layout_alignTop="@id/ProcessBar4"
+                android:layout_alignTop="@id/pkProcessBar4"
                 android:layout_marginTop="-20px"
-                android:layout_alignRight="@id/ProcessBar4"
+                android:layout_alignRight="@id/pkProcessBar4"
                 android:textColor="#FFFFFF"
-                android:text="0"
+                android:text=""
                 android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward4"
+                android:id="@+id/pkReward4"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward3"
+                android:layout_below="@id/pkReward3"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
                 android:background="@drawable/rankimage"/>
             <ImageView
-                android:id="@+id/reward4head"
+                android:id="@+id/pkReward4head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward3"
+                android:layout_below="@id/pkReward3"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/circle"/>
 
+            <!--排行榜5-->
             <ImageView
-                android:id="@+id/reward5Image"
+                android:id="@+id/pkReward5Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward4Image"
+                android:layout_below="@id/pkReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/rankbar" />
             <ImageView
-                android:id="@+id/ProcessBar5"
+                android:id="@+id/pkProcessBar5"
                 android:layout_width="628px"
                 android:layout_height="80px"
-                android:layout_below="@id/reward4Image"
+                android:layout_below="@id/pkReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
                 android:background="@drawable/processbar" />
@@ -391,33 +396,31 @@
                 android:id="@+id/pkRank5Score"
                 android:layout_width="100px"
                 android:layout_height="80px"
-                android:layout_alignTop="@id/ProcessBar5"
+                android:layout_alignTop="@id/pkProcessBar5"
                 android:layout_marginTop="-20px"
-                android:layout_alignRight="@id/ProcessBar5"
+                android:layout_alignRight="@id/pkProcessBar5"
                 android:textColor="#FFFFFF"
-                android:text="0"
+                android:text=""
                 android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward5"
+                android:id="@+id/pkReward5"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward4"
+                android:layout_below="@id/pkReward4"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
                 android:background="@drawable/rankimage"/>
             <ImageView
-                android:id="@+id/reward5head"
+                android:id="@+id/pkReward5head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward4"
+                android:layout_below="@id/pkReward4"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/circle"/>
-
-
         </RelativeLayout>
 
     </LinearLayout>

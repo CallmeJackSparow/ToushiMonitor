@@ -429,6 +429,8 @@
 
         <TextView
             android:id="@+id/jokeInfo"
+            android:layout_marginLeft="32px"
+            android:layout_marginRight="32px"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
             android:layout_width="match_parent"

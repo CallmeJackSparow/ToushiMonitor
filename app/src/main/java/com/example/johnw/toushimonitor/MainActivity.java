@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Camera;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -24,6 +26,7 @@ import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +38,7 @@ import com.example.johnw.toushimonitor.camera.CameraSurfaceHolder;
 import com.example.johnw.toushimonitor.camera.HandleBitmap;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mLogoImage;
     private ImageView mKoImageView;
     private ImageView mScanView;
+    private ImageView mScanView1;
     private ImageView mFigureView;
     private TextView mUserCount;
 
@@ -84,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
     int mFaceCountInsistTime = 0; //持续次数
     int mPlayIndex = -1; //播放扫描视频时间点
     int mChangeActivityIndex = -1; //切换Activity时间点
+
+    int mPlayer1Left;
+    int mPlayer1Top;
+    int mPlayer1Width;
+    int mPlayer1Height;
+
+    int mPlayer2Left;
+    int mPlayer2Top;
+    int mPlayer2Width;
+    int mPlayer2Height;
 
     boolean mIsScan;
 
@@ -112,6 +127,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean b = requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Window window = getWindow();
+        window.setStatusBarColor(Color.TRANSPARENT);
+        window.setNavigationBarColor(Color.TRANSPARENT);
+
         setContentView(R.layout.activity_main);
 
         //多线程模式
@@ -153,6 +172,9 @@ public class MainActivity extends AppCompatActivity {
 
         mScanView = (ImageView)findViewById(R.id.scanVideo);
         mScanView.setVisibility(View.INVISIBLE);
+
+        mScanView1 = (ImageView)findViewById(R.id.scanVideo2);
+        mScanView1.setVisibility(View.INVISIBLE);
 
         mFigureView = (ImageView) findViewById(R.id.figure); //头像展示
         mFigureView.setVisibility(View.INVISIBLE);
@@ -273,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
+        //mSurfaceView.setVisibility(View.INVISIBLE);
         mCameraSurfaceHolder.setCameraSurfaceHolder(this, mSurfaceView);
     }
 
@@ -334,6 +357,35 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean GetIsScan() { return mIsScan; }
 
+    //触碰屏幕
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: //触碰屏幕
+                if (mSettingButton.getVisibility() == View.INVISIBLE) {
+                    if (mTouchScreen == true) {
+                        mSettingButton.setVisibility(View.VISIBLE);
+                    } else {
+                        mTouchScreen = true;
+                    }
+                }
+                else if (mSettingButton.getVisibility() == View.VISIBLE) {
+                    mSettingButton.setVisibility(View.INVISIBLE);
+                }
+
+                mSettingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                break;
+        }
+        return true;
+    }
+
+
     //转换模式----连续三次是同一个模式则进入扫描阶段
     public void ChangeViewMode(String faceInfo) { //解析图片完成进行等待两秒之后
         if (mIsScan) {
@@ -341,6 +393,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mStrFaceInfo = faceInfo;
         mMainLayout.setVisibility(View.INVISIBLE);
+        mSurfaceView.setVisibility(View.VISIBLE);
         int faceNum = GetFaceNum(faceInfo);
 
         if (faceNum == 1) {
@@ -367,29 +420,82 @@ public class MainActivity extends AppCompatActivity {
 
     //扫描人像
     public void ScanFigure(String faceinfo) {
-
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.johnw.toushimonitor/files/image/face.jpg";
         mFigureView.setImageBitmap(handleBitmap.GetNormalBitmap(path));
 
         mFigureView.setVisibility(View.VISIBLE);
-        mSurfaceView.setVisibility(View.VISIBLE);
+        mSurfaceView.setVisibility(View.INVISIBLE);
 
         SetUserCount();
 
         mPlayIndex = mIndex;
-        mScanView.setLeft(0);
-        mScanView.setTop(0);
-        mScanView.setRight(1080);
-        mScanView.setBottom(1920);
+
+        try {
+            JSONObject object = new JSONObject(faceinfo);
+            String resultMsg = object.getString("result");
+            JSONObject objFaceInfo = new JSONObject(resultMsg);
+            String listMsg = objFaceInfo.getString("face_list");
+            JSONArray arrayFaceList = new JSONArray(listMsg);
+            if (mFaceCount == 1) { //单人模式
+                JSONObject faceInfo = arrayFaceList.getJSONObject(0);
+                String location = faceInfo.getString("location");
+                Toast.makeText(getApplicationContext(), location, Toast.LENGTH_LONG).show();
+                JSONObject objLocation = new JSONObject(location);
+                mPlayer1Left = objLocation.getInt("left");
+                mPlayer1Top = objLocation.getInt("top");
+                mPlayer1Width = objLocation.getInt("width");
+                mPlayer1Height = objLocation.getInt("height");
+            }
+            else if (mFaceCount == 2) { //双人模式
+                JSONObject player1Info = arrayFaceList.getJSONObject(0);
+                JSONObject player2Info = arrayFaceList.getJSONObject(1);
+                String location1 = player1Info.getString("location");
+                String location2 = player2Info.getString("location");
+                JSONObject objLocation1 = new JSONObject(location1);
+                JSONObject objLocation2 = new JSONObject(location2);
+                mPlayer1Left = objLocation1.getInt("left");
+                mPlayer1Top = objLocation1.getInt("top");
+                mPlayer1Width = objLocation1.getInt("width");
+                mPlayer1Height = objLocation1.getInt("height");
+                mPlayer2Left = objLocation2.getInt("left");
+                mPlayer2Top = objLocation2.getInt("top");
+                mPlayer2Width = objLocation2.getInt("width");
+                mPlayer2Height = objLocation2.getInt("height");
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        RelativeLayout.LayoutParams params;
+        params = (RelativeLayout.LayoutParams) mScanView.getLayoutParams();
+        params.leftMargin = mPlayer1Left;
+        params.topMargin = mPlayer1Top;
+        params.height = mPlayer1Height;
+        params.width = mPlayer1Width;
         mScanView.setVisibility(View.VISIBLE);
         ((AnimationDrawable)mScanView.getBackground()).start();
+
+        if (mFaceCount == 2) { //双人模式添加第二个扫描画面
+            RelativeLayout.LayoutParams params1;
+            params1 = (RelativeLayout.LayoutParams) mScanView1.getLayoutParams();
+            params1.leftMargin = mPlayer2Left;
+            params1.topMargin = mPlayer2Top;
+            params1.height = mPlayer2Height;
+            params1.width = mPlayer2Width;
+            mScanView1.setVisibility(View.VISIBLE);
+            ((AnimationDrawable)mScanView1.getBackground()).start();
+        }
     }
 
     //切换界面信息
     public void ChangeActivity(){
         if (mFaceCount == 1) {
             Intent intent = new Intent(MainActivity.this, faceAnalysisActivity.class);
+           // Intent intent = new Intent(MainActivity.this, QRCodeActivity.class);
             intent.putExtra("faceInfo", mStrFaceInfo);
+            intent.putExtra("player1Left", Integer.toString(mPlayer1Left));
+            intent.putExtra("player1Top", Integer.toString(mPlayer1Top));
+            intent.putExtra("player1Width", Integer.toString(mPlayer1Width));
+            intent.putExtra("player1Height", Integer.toString(mPlayer1Height));
             startActivity(intent);
         } else if (mFaceCount == 2) {
             Intent intent = new Intent(MainActivity.this, PKActivity.class);
@@ -398,6 +504,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public int GetFaceNum(String info) {
         int faceNum = 0;
         try {
@@ -405,6 +512,35 @@ public class MainActivity extends AppCompatActivity {
             String resultMsg = object.getString("result");
             JSONObject objFaceInfo = new JSONObject(resultMsg);
             faceNum = objFaceInfo.getInt("face_num");
+
+            String listMsg = objFaceInfo.getString("face_list");
+            JSONArray arrayFaceList = new JSONArray(listMsg);
+            if (faceNum == 1) { //单人模式
+                JSONObject faceInfo = arrayFaceList.getJSONObject(0);
+                String location = faceInfo.getString("location");
+                JSONObject objLocation = new JSONObject(location);
+                mPlayer1Left = objLocation.getInt("left");
+                mPlayer1Top = objLocation.getInt("top");
+                mPlayer1Width = objLocation.getInt("width");
+                mPlayer1Height = objLocation.getInt("height");
+            }
+            else if (faceNum == 2) { //双人模式
+                JSONObject player1Info = arrayFaceList.getJSONObject(0);
+                JSONObject player2Info = arrayFaceList.getJSONObject(1);
+                String location1 = player1Info.getString("location");
+                String location2 = player1Info.getString("location");
+                JSONObject objLocation1 = new JSONObject(location1);
+                JSONObject objLocation2 = new JSONObject(location1);
+                mPlayer1Left = objLocation1.getInt("left");
+                mPlayer1Top = objLocation1.getInt("top");
+                mPlayer1Width = objLocation1.getInt("width");
+                mPlayer1Height = objLocation1.getInt("height");
+                mPlayer2Left = objLocation2.getInt("left");
+                mPlayer2Top = objLocation2.getInt("top");
+                mPlayer2Width = objLocation2.getInt("width");
+                mPlayer2Height = objLocation2.getInt("height");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -414,11 +550,16 @@ public class MainActivity extends AppCompatActivity {
     //计算使用人次
     public void SetUserCount() {
         SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
-        int mCount = sharedPreferences.getInt("count", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("count", mCount + 1);
+        int count = 0;
+        if (mFaceCount == 1) {
+            count = sharedPreferences.getInt("count", 0);
+            editor.putInt("count", count + 1);
+        } else if (mFaceCount == 2) {
+            count = sharedPreferences.getInt("round", 0);
+            editor.putInt("round", count + 1);
+        }
         editor.apply();
-        mUserCount.setText(String.valueOf(mCount + 1));
+        //mUserCount.setText(String.valueOf(mCount + 1));
     }
-
 }

@@ -2,6 +2,7 @@ package com.example.johnw.toushimonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ import java.util.TimerTask;
 
 public class PKActivity extends AppCompatActivity {
 
+    private TextView mRound;
     private TextView mPlayer1Score;
     private TextView mPlayer2Score;
     private ImageView mPlayer1Face;
@@ -51,6 +54,11 @@ public class PKActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pkactivity);
 
+        mRound = (TextView) findViewById(R.id.pkRound);
+        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
+        int count = sharedPreferences.getInt("round", 0);
+        mRound.setText(String.valueOf(count));
+
         mPlayer1Score = (TextView) findViewById(R.id.player1Score);
         mPlayer2Score = (TextView) findViewById(R.id.player2Score);
 
@@ -65,9 +73,9 @@ public class PKActivity extends AppCompatActivity {
         mPlayer1Face = (ImageView) findViewById(R.id.player1Face);
         mPlayer2Face = (ImageView) findViewById(R.id.player2Face);
 
-
         ShowInfo();
 
+        SaveRankInfo();
 
         mTimer = new Timer();
         mTimerTask = new TimerTask() {
@@ -76,9 +84,9 @@ public class PKActivity extends AppCompatActivity {
                 if (mIndex == 3) {
                     SaveImage();
                 }
-                if (mIndex == 6) {
-                    ChangeToRank();
-                }
+//                if (mIndex == 6) {
+//                    ChangeToRank();
+//                }
                 mIndex++;
             }
         };
@@ -99,13 +107,13 @@ public class PKActivity extends AppCompatActivity {
             JSONArray arrayFaceInfo = new JSONArray(faceList);
 
             if (arrayFaceInfo.length() == 2) { //双人模式
-                JSONObject player1 = arrayFaceInfo.getJSONObject(0); //选手1
+                //选手1
+                JSONObject player1 = arrayFaceInfo.getJSONObject(0);
                 int player1Score = (int) Double.parseDouble(player1.getString("beauty"));//.to
                 player1Score = player1Score + 40;
                 if (player1Score > 100) {
                     player1Score = 100;
                 }
-                mPlayer1Score.setText(String.valueOf(player1Score));
 
                 String player1Location = player1.getString("location");
                 JSONObject objPlayer1Location = new JSONObject(player1Location);
@@ -113,7 +121,9 @@ public class PKActivity extends AppCompatActivity {
                 int player1top = (int) Math.round(objPlayer1Location.getDouble("top"));
                 int player1Width = (int) Math.round(objPlayer1Location.getDouble("width"));
                 int player1Height = (int) Math.round(objPlayer1Location.getDouble("height"));
-                Bitmap player1Bitmap = handleBitmap.CaptureImage(imageFileName, player1left, player1top, player1Width, player1Height);
+
+                Bitmap player1Bitmap = handleBitmap.CaptureImage(imageFileName, player1left - 40, player1top - 40,
+                        player1Width + 80, player1Height + 80);
                 mPlayer1Face.setImageBitmap(player1Bitmap);
 
                 //情绪
@@ -164,14 +174,13 @@ public class PKActivity extends AppCompatActivity {
                 } else {
                     mPlayer1Feature3.setText("大笑");
                 }
-
-                JSONObject player2 = arrayFaceInfo.getJSONObject(1); //选手2
+                //选手2
+                JSONObject player2 = arrayFaceInfo.getJSONObject(1);
                 int player2Score = (int) Double.parseDouble(player2.getString("beauty"));//.to
                 player2Score = player2Score + 40;
                 if (player2Score > 100) {
                     player2Score = 100;
                 }
-                mPlayer2Score.setText(String.valueOf(player2Score));
 
                 String player2Location = player2.getString("location");
                 JSONObject objPlayer2Location = new JSONObject(player2Location);
@@ -179,7 +188,8 @@ public class PKActivity extends AppCompatActivity {
                 int player2top = (int) Math.round(objPlayer2Location.getDouble("top"));
                 int player2Width = (int) Math.round(objPlayer2Location.getDouble("width"));
                 int player2Height = (int) Math.round(objPlayer2Location.getDouble("height"));
-                Bitmap player2Bitmap = handleBitmap.CaptureImage(imageFileName, player2left, player2top, player2Width, player2Height);
+                Bitmap player2Bitmap = handleBitmap.CaptureImage(imageFileName, player2left - 40, player2top - 40,
+                        player2Width + 80, player2Height + 80);
                 mPlayer2Face.setImageBitmap(player2Bitmap);
                 //情绪
                 JSONObject objEmotion1 = new JSONObject(player2.getString("emotion"));
@@ -230,14 +240,34 @@ public class PKActivity extends AppCompatActivity {
                     mPlayer2Feature3.setText("大笑");
                 }
 
+                ValueAnimator animator = ValueAnimator.ofInt(0, player1Score);
+                animator.setDuration(1500);
+                animator.setInterpolator(new LinearInterpolator());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        mPlayer1Score.setText(animation.getAnimatedValue().toString());
+                    }
+                });
+                animator.start();
+
+                ValueAnimator animator1 = ValueAnimator.ofInt(0, player2Score);
+                animator1.setDuration(1500);
+                animator1.setInterpolator(new LinearInterpolator());
+                animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        mPlayer2Score.setText(animation.getAnimatedValue().toString());
+                    }
+                });
+                animator1.start();
+
+                String winnerImage = getExternalFilesDir(null).getAbsolutePath() + "/image/pkWinner.png";
                 if (player1Score > player2Score) {
                     mBeautyScore = player1Score;
                     if (player1Bitmap!= null) {
                         try {
-                            String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                    "/Android/data/com.example.johnw.toushimonitor/files/image/";
-                            String imagePath = storePath + "pkWinner.png";
-                            File file = new File(imagePath);
+                            File file = new File(winnerImage);
                             FileOutputStream os = new FileOutputStream(file);
                             player1Bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
                         } catch (Exception e) {
@@ -249,32 +279,24 @@ public class PKActivity extends AppCompatActivity {
                     mBeautyScore = player2Score;
                     if (player2Bitmap!= null) {
                         try {
-                            String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                    "/Android/data/com.example.johnw.toushimonitor/files/image/";
-                            String imagePath = storePath + "pkWinner.png";
-                            File file = new File(imagePath);
+                            File file = new File(winnerImage);
                             FileOutputStream os = new FileOutputStream(file);
-                            player1Bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+                            player2Bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
-
-
         } catch (Exception ex) {
             Toast.makeText(PKActivity.this, "Exception",Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
         }
     }
 
-
     public void SaveRankInfo()
     {
-
-        String imageFileName = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                "/Android/data/com.example.johnw.toushimonitor/files/image/pkWinner.png";
+        String imageFileName = getExternalFilesDir(null).getAbsolutePath() + "/image/pkWinner.png";
 
         SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -285,46 +307,46 @@ public class PKActivity extends AppCompatActivity {
         String rank4Image = getExternalFilesDir(null).getAbsolutePath() + "/image/pk/rank4.jpg";
         String rank5Image = getExternalFilesDir(null).getAbsolutePath() + "/image/pk/rank5.jpg";
 
-        int manRank1Score = sharedPreferences.getInt("pkRank1", 0);
-        int manRank2Score = sharedPreferences.getInt("pkRank2", 0);
-        int manRank3Score = sharedPreferences.getInt("pkRank3", 0);
-        int manRank4Score = sharedPreferences.getInt("pkRank4", 0);
-        int manRank5Score = sharedPreferences.getInt("pkRank5", 0);
+        int rank1Score = sharedPreferences.getInt("pkRank1", 0);
+        int rank2Score = sharedPreferences.getInt("pkRank2", 0);
+        int rank3Score = sharedPreferences.getInt("pkRank3", 0);
+        int rank4Score = sharedPreferences.getInt("pkRank4", 0);
+        int rank5Score = sharedPreferences.getInt("pkRank5", 0);
 
-        if (mBeautyScore >= manRank1Score) {
-            editor.putInt("manRank5", manRank4Score);
-            editor.putInt("manRank4", manRank3Score);
-            editor.putInt("manRank3", manRank2Score);
-            editor.putInt("manRank2", manRank1Score);
-            editor.putInt("manRank1", mBeautyScore);
+        if (mBeautyScore >= rank1Score) {
+            editor.putInt("pkRank5", rank4Score);
+            editor.putInt("pkRank4", rank3Score);
+            editor.putInt("pkRank3", rank2Score);
+            editor.putInt("pkRank2", rank1Score);
+            editor.putInt("pkRank1", mBeautyScore);
             renameFile(rank4Image, rank5Image);
             renameFile(rank3Image, rank4Image);
             renameFile(rank2Image, rank3Image);
             renameFile(rank1Image, rank2Image);
             renameFile(imageFileName, rank1Image);
-        } else if (mBeautyScore >= manRank2Score) {
-            editor.putInt("manRank5", manRank4Score);
-            editor.putInt("manRank4", manRank3Score);
-            editor.putInt("manRank3", manRank2Score);
-            editor.putInt("manRank2", mBeautyScore);
+        } else if (mBeautyScore >= rank2Score) {
+            editor.putInt("pkRank5", rank4Score);
+            editor.putInt("pkRank4", rank3Score);
+            editor.putInt("pkRank3", rank2Score);
+            editor.putInt("pkRank2", mBeautyScore);
             renameFile(rank4Image, rank5Image);
             renameFile(rank3Image, rank4Image);
             renameFile(rank2Image, rank3Image);
             renameFile(imageFileName, rank2Image);
-        } else if (mBeautyScore >= manRank3Score) {
-            editor.putInt("manRank5", manRank4Score);
-            editor.putInt("manRank4", manRank3Score);
-            editor.putInt("manRank3", mBeautyScore);
+        } else if (mBeautyScore >= rank3Score) {
+            editor.putInt("pkRank5", rank4Score);
+            editor.putInt("pkRank4", rank3Score);
+            editor.putInt("pkRank3", mBeautyScore);
             renameFile(rank4Image, rank5Image);
             renameFile(rank3Image, rank4Image);
             renameFile(imageFileName, rank3Image);
-        } else if (mBeautyScore >= manRank4Score) {
-            editor.putInt("manRank5", manRank4Score);
-            editor.putInt("manRank4", mBeautyScore);
+        } else if (mBeautyScore >= rank4Score) {
+            editor.putInt("pkRank5", rank4Score);
+            editor.putInt("pkRank4", mBeautyScore);
             renameFile(rank4Image, rank5Image);
             renameFile(imageFileName, rank4Image);
-        } else if (mBeautyScore >= manRank5Score) {
-            editor.putInt("manRank5", mBeautyScore);
+        } else if (mBeautyScore >= rank5Score) {
+            editor.putInt("pkRank5", mBeautyScore);
             renameFile(imageFileName, rank5Image);
         }
         editor.apply();
@@ -338,16 +360,43 @@ public class PKActivity extends AppCompatActivity {
 
         if (bitmap != null) {
             try {
-                String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/Android/data/com.example.johnw.toushimonitor/files/image/";
-                String imagePath = storePath + "screenshot.png";
-                File file = new File(imagePath);
+                String storePath = getExternalFilesDir(null).getAbsolutePath() + "/image/screenshot.png";
+                File file = new File(storePath);
                 FileOutputStream os = new FileOutputStream(file);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
+        int deviceId = sharedPreferences.getInt("deviceId",1);
+
+        String fileUrl = handleBitmap.GetQR(deviceId);
+        String path = getExternalFilesDir(null).getAbsolutePath()  + "/image/";
+        File saveFile = new File(path, "qrString.txt");
+        FileOutputStream outputStream1 = null;
+        try {
+            outputStream1 = new FileOutputStream(saveFile);
+            outputStream1.write(fileUrl.getBytes("GBK"));
+            outputStream1.close();
+            outputStream1.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        Bitmap qrBitmap = handleBitmap.GetNetworkBitmap(fileUrl);
+        String qrPath = getExternalFilesDir(null).getAbsolutePath() + "/image/qrImage.jpg";
+        try {
+            File file = new File(qrPath);
+            FileOutputStream out = new FileOutputStream(file);
+            qrBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ChangeToRank();
     }
 
     private File renameFile(String oldPath, String newPath) {

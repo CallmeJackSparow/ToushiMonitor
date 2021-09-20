@@ -25,8 +25,6 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mBtnChangeDegree;
     private Button mBtnBack;
 
-
-
     boolean mButtonType = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

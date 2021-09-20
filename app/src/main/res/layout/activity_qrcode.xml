@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFF">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/qrBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6"></ImageView>
 
     <ImageView
         android:layout_width="865px"
@@ -22,6 +27,7 @@
 
     <ImageView
         android:id="@+id/qr_image"
+        android:layout_marginTop= "20px"
         android:layout_width="400px"
         android:layout_height="400px"
         android:layout_centerHorizontal="true"/>
@@ -33,7 +39,7 @@
         android:layout_below="@id/qr_image"
         android:layout_centerHorizontal="true"
         android:background="@drawable/qrscan"/>
-    
+
     <ImageView
         android:id="@+id/qr_countdown"
         android:layout_below="@+id/qr_text"
@@ -41,20 +47,8 @@
         android:layout_width="370px"
         android:layout_height="78px"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/qrcountdown"/>
+        android:background="@drawable/s9"/>
 
-    <TextView
-        android:id="@+id/countdown"
-        android:layout_width="150px"
-        android:layout_height="100px"
-        android:layout_marginTop="-30px"
-        android:layout_alignLeft="@+id/qr_countdown"
-        android:layout_alignTop="@id/qr_countdown"
-        android:text="9"
-        android:textSize="50px"
-        android:fontFamily="@font/sourcehansans"
-
-        android:textColor="#FFFF"/>
 
     <ImageView
         android:id="@+id/scoreRectangle"

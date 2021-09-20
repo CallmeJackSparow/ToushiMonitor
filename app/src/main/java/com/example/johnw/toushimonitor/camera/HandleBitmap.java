@@ -40,8 +40,11 @@ public class HandleBitmap {
     public static Bitmap GetNormalBitmap(String pImagePath) { //获取最原始的图片Bitmap信息
         Bitmap originBitmap = null;
         try {
-            FileInputStream fis = new FileInputStream(pImagePath);
-            originBitmap = BitmapFactory.decodeStream(fis);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.outHeight = 1920;
+            options.outWidth = 1080;
+            options.inJustDecodeBounds = false;
+            originBitmap = BitmapFactory.decodeFile(pImagePath, options);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +75,7 @@ public class HandleBitmap {
             Canvas canvas = new Canvas(circleBitmap);
             final Paint paint = new Paint();
             final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getWidth());
-            final RectF rectF = new RectF(new Rect(0,0,bitmap.getWidth(), bitmap.getWidth()));
+            final RectF rectF = new RectF(new Rect(0,0, bitmap.getWidth(), bitmap.getWidth()));
             float roundPx = 0.0f;
             roundPx = bitmap.getHeight();
             paint.setAntiAlias(true);
@@ -319,6 +322,18 @@ public class HandleBitmap {
         Bitmap captureBitmap = null;
 
         try {
+            if (left < 0) {
+                left = 0;
+            }
+            if (top < 0) {
+                top = 0;
+            }
+            if (left + width > originBitmap.getWidth()) {
+                width = originBitmap.getWidth() - left;
+            }
+            if (top + height > originBitmap.getHeight()) {
+                height = originBitmap.getHeight() - top;
+            }
             captureBitmap = Bitmap.createBitmap(originBitmap, left, top, width, height);
         } catch (Exception e) {
             e.printStackTrace();
@@ -336,16 +351,16 @@ public class HandleBitmap {
 
             Canvas canvas = new Canvas(circleBitmap);
             final Paint paint = new Paint();
-            final Rect rect = new Rect(0, 0, captureBitmap.getHeight(), captureBitmap.getHeight());
-            final RectF rectF = new RectF(new Rect(0,0,captureBitmap.getHeight(), captureBitmap.getHeight()));
+            final Rect rect = new Rect(0, 0, circleLength, circleLength);
+            final RectF rectF = new RectF(new Rect(0,0, circleLength, circleLength));
             float roundPx = 0.0f;
-            roundPx = captureBitmap.getHeight();
+            roundPx = circleLength;
             paint.setAntiAlias(true);
             canvas.drawARGB(0,0,0,0);
             paint.setColor(Color.WHITE);
             canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-            final Rect src = new Rect(0,0,captureBitmap.getHeight(), captureBitmap.getHeight());
+            final Rect src = new Rect(0,0, captureBitmap.getWidth(), captureBitmap.getHeight());
             canvas.drawBitmap(captureBitmap, src, rect, paint);
             return circleBitmap;
         } catch (Exception e) {

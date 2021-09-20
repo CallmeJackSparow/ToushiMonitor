@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -16,15 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.johnw.toushimonitor.camera.HandleBitmap;
-import com.example.johnw.toushimonitor.ConvertUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,15 +26,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class faceAnalysisActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class faceAnalysisActivity extends AppCompatActivity {
 
     private RelativeLayout mMainLayout;
     private ImageView mImageView;
@@ -91,8 +82,14 @@ public class faceAnalysisActivity extends Activity {
         jokeView = (TextView) findViewById(R.id.jokeInfo);
         charmInfoView = (TextView) findViewById(R.id.charmInfo);
 
+        String left = getIntent().getStringExtra("player1Left");
+        String top = getIntent().getStringExtra("player1Top");
+        String width = getIntent().getStringExtra("player1Width");
+        String height = getIntent().getStringExtra("player1Height");
+
         String imageFileName = getExternalFilesDir(null).getAbsolutePath() + "/image/face.jpg";
-        Bitmap bitmap = handleBitmap.getBitmap(imageFileName);
+        Bitmap bitmap = handleBitmap.CaptureImage(imageFileName, Integer.parseInt(left) - 40, Integer.parseInt(top) - 40,
+                Integer.parseInt(width) + 80, Integer.parseInt(height) + 80);
         mImageView.setImageBitmap(bitmap);
         //mImageView.setRotation(270);
 
@@ -164,17 +161,6 @@ public class faceAnalysisActivity extends Activity {
             int womanRank4Score = sharedPreferences.getInt("womanRank4", 0);
             int womanRank5Score = sharedPreferences.getInt("womanRank5", 0);
 
-//            Set<String> womanScore = sharedPreferences.getStringSet("womanScore",null);
-//            ArrayList<String> scoreList = new ArrayList<String>(womanScore);
-//            for (int i = 0; i < scoreList.size(); i++) {
-//                if (Integer.parseInt(scoreList.get(i)) <= mBeautyScore) {
-//                    mCurrentRank = i;
-//                    scoreList.add(i, String.valueOf(mBeautyScore));
-//                }
-//            }
-//            Set<String> newScoreList = new HashSet<String>(scoreList);
-//            editor.putStringSet("womanScore", newScoreList);
-
             if (mBeautyScore > womanRank1Score) {
                 editor.putInt("womanRank5", womanRank4Score);
                 editor.putInt("womanRank4", womanRank3Score);
@@ -222,9 +208,6 @@ public class faceAnalysisActivity extends Activity {
                 if (mIndex == 3) {
                     SaveImage();
                 }
-                if (mIndex == 6) {
-                    ChangeToRank();
-                }
                 mIndex++;
             }
         };
@@ -249,6 +232,35 @@ public class faceAnalysisActivity extends Activity {
                 e.printStackTrace();
             }
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Toushi", Context.MODE_PRIVATE);
+        int deviceId = sharedPreferences.getInt("deviceId",1);
+
+        String fileUrl = handleBitmap.GetQR(deviceId);
+        String path = getExternalFilesDir(null).getAbsolutePath()  + "/image/";
+        File saveFile = new File(path, "qrString.txt");
+        FileOutputStream outputStream1 = null;
+        try {
+            outputStream1 = new FileOutputStream(saveFile);
+            outputStream1.write(fileUrl.getBytes("GBK"));
+            outputStream1.close();
+            outputStream1.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        Bitmap qrBitmap = handleBitmap.GetNetworkBitmap(fileUrl);
+        String qrPath = getExternalFilesDir(null).getAbsolutePath() + "/image/qrImage.jpg";
+        try {
+            File file = new File(qrPath);
+            FileOutputStream out = new FileOutputStream(file);
+            qrBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ChangeToRank();
     }
 
     public void ShowInfo() {
