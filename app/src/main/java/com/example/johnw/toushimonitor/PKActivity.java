@@ -122,8 +122,8 @@ public class PKActivity extends AppCompatActivity {
                 int player1Width = (int) Math.round(objPlayer1Location.getDouble("width"));
                 int player1Height = (int) Math.round(objPlayer1Location.getDouble("height"));
 
-                Bitmap player1Bitmap = handleBitmap.CaptureImage(imageFileName, player1left - 40, player1top - 40,
-                        player1Width + 80, player1Height + 80);
+                Bitmap player1Bitmap = handleBitmap.CaptureImage(imageFileName, player1left - 200, player1top - 200,
+                        player1Width + 400, player1Height + 400);
                 mPlayer1Face.setImageBitmap(player1Bitmap);
 
                 //情绪

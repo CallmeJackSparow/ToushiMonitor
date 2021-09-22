@@ -36,6 +36,9 @@ public class WomenGodRankActivity extends AppCompatActivity {
     private ImageView mRank1Head;
     private ImageView mRank2Head;
     private ImageView mRank3Head;
+    private ImageView mRank1Circle;
+    private ImageView mRank2Circle;
+    private ImageView mRank3Circle;
     private TextView mRank1LabelScore;
     private TextView mRank2LabelScore;
     private TextView mRank3LabelScore;
@@ -45,12 +48,22 @@ public class WomenGodRankActivity extends AppCompatActivity {
     private ImageView mReward3Head;
     private ImageView mReward4Head;
     private ImageView mReward5Head;
+    private ImageView mReward1Base;
+    private ImageView mReward2Base;
+    private ImageView mReward3Base;
+    private ImageView mReward4Base;
+    private ImageView mReward5Base;
 
-    private ImageView mReward1ProgreessBar;
-    private ImageView mReward2ProgreessBar;
-    private ImageView mReward3ProgreessBar;
-    private ImageView mReward4ProgreessBar;
-    private ImageView mReward5ProgreessBar;
+    private ImageView mReward1ProgressBase;
+    private ImageView mReward2ProgressBase;
+    private ImageView mReward3ProgressBase;
+    private ImageView mReward4ProgressBase;
+    private ImageView mReward5ProgressBase;
+    private ImageView mReward1ProgressBar;
+    private ImageView mReward2ProgressBar;
+    private ImageView mReward3ProgressBar;
+    private ImageView mReward4ProgressBar;
+    private ImageView mReward5ProgressBar;
 
     private TextView mRank1Score;
     private TextView mRank2Score;
@@ -90,6 +103,9 @@ public class WomenGodRankActivity extends AppCompatActivity {
         mRank1Head = (ImageView) findViewById(R.id.womenRank1Image);
         mRank2Head = (ImageView) findViewById(R.id.womenRank2Image);
         mRank3Head = (ImageView) findViewById(R.id.womenRank3Image);
+        mRank1Circle = (ImageView) findViewById(R.id.womenRank1);
+        mRank2Circle = (ImageView) findViewById(R.id.womenRank2);
+        mRank3Circle = (ImageView) findViewById(R.id.womenRank3);
         mRank1LabelScore = (TextView) findViewById(R.id.womanRank1ScoreLabel);
         mRank2LabelScore = (TextView) findViewById(R.id.womanRank2ScoreLabel);
         mRank3LabelScore = (TextView) findViewById(R.id.womanRank3ScoreLabel);
@@ -99,12 +115,59 @@ public class WomenGodRankActivity extends AppCompatActivity {
         mReward3Head = (ImageView) findViewById(R.id.womenReward3head);
         mReward4Head = (ImageView) findViewById(R.id.womenReward4head);
         mReward5Head = (ImageView) findViewById(R.id.womenReward5head);
+        mReward1Base = (ImageView) findViewById(R.id.womenReward1);
+        mReward2Base = (ImageView) findViewById(R.id.womenReward2);
+        mReward3Base = (ImageView) findViewById(R.id.womenReward3);
+        mReward4Base = (ImageView) findViewById(R.id.womenReward4);
+        mReward5Base = (ImageView) findViewById(R.id.womenReward5);
 
-        mReward1ProgreessBar = (ImageView) findViewById(R.id.womanReward1ProcessBar);
-        mReward2ProgreessBar = (ImageView) findViewById(R.id.womanReward2ProcessBar);
-        mReward3ProgreessBar = (ImageView) findViewById(R.id.womanReward3ProcessBar);
-        mReward4ProgreessBar = (ImageView) findViewById(R.id.womanReward4ProcessBar);
-        mReward5ProgreessBar = (ImageView) findViewById(R.id.womanReward5ProcessBar);
+        mReward1ProgressBase = (ImageView) findViewById(R.id.womenReward1Image);
+        mReward2ProgressBase = (ImageView) findViewById(R.id.womenReward2Image);
+        mReward3ProgressBase = (ImageView) findViewById(R.id.womenReward3Image);
+        mReward4ProgressBase = (ImageView) findViewById(R.id.womenReward4Image);
+        mReward5ProgressBase = (ImageView) findViewById(R.id.womenReward5Image);
+        mReward1ProgressBar = (ImageView) findViewById(R.id.womanReward1ProcessBar);
+        mReward2ProgressBar = (ImageView) findViewById(R.id.womanReward2ProcessBar);
+        mReward3ProgressBar = (ImageView) findViewById(R.id.womanReward3ProcessBar);
+        mReward4ProgressBar = (ImageView) findViewById(R.id.womanReward4ProcessBar);
+        mReward5ProgressBar = (ImageView) findViewById(R.id.womanReward5ProcessBar);
+
+        if (mRank1 > 0) {
+            mRank1Head.setVisibility(View.VISIBLE);
+            mRank1Circle.setVisibility(View.VISIBLE);
+            mReward1Head.setVisibility(View.VISIBLE);
+            mReward1Base.setVisibility(View.VISIBLE);
+            mReward1ProgressBase.setVisibility(View.VISIBLE);
+            mReward1ProgressBar.setVisibility(View.VISIBLE);
+        }
+        if (mRank2 > 0) {
+            mRank2Head.setVisibility(View.VISIBLE);
+            mRank2Circle.setVisibility(View.VISIBLE);
+            mReward2Head.setVisibility(View.VISIBLE);
+            mReward2Base.setVisibility(View.VISIBLE);
+            mReward2ProgressBase.setVisibility(View.VISIBLE);
+            mReward2ProgressBar.setVisibility(View.VISIBLE);
+        }
+        if (mRank3 > 0) {
+            mRank3Head.setVisibility(View.VISIBLE);
+            mRank3Circle.setVisibility(View.VISIBLE);
+            mReward3Head.setVisibility(View.VISIBLE);
+            mReward3Base.setVisibility(View.VISIBLE);
+            mReward3ProgressBase.setVisibility(View.VISIBLE);
+            mReward3ProgressBar.setVisibility(View.VISIBLE);
+        }
+        if (mRank4 > 0) {
+            mReward4Head.setVisibility(View.VISIBLE);
+            mReward4Base.setVisibility(View.VISIBLE);
+            mReward4ProgressBase.setVisibility(View.VISIBLE);
+            mReward4ProgressBar.setVisibility(View.VISIBLE);
+        }
+        if (mRank5 > 0) {
+            mReward5Head.setVisibility(View.VISIBLE);
+            mReward5Base.setVisibility(View.VISIBLE);
+            mReward5ProgressBase.setVisibility(View.VISIBLE);
+            mReward5ProgressBar.setVisibility(View.VISIBLE);
+        }
 
         float num1 = mRank1 / (float)100;
         float num2 = mRank2 / (float)100;
@@ -126,11 +189,11 @@ public class WomenGodRankActivity extends AppCompatActivity {
         scaleAnimation3.setDuration(1000);
         scaleAnimation4.setDuration(1000);
         scaleAnimation5.setDuration(1000);
-        mReward1ProgreessBar.startAnimation(scaleAnimation1);
-        mReward2ProgreessBar.startAnimation(scaleAnimation2);
-        mReward3ProgreessBar.startAnimation(scaleAnimation3);
-        mReward4ProgreessBar.startAnimation(scaleAnimation4);
-        mReward5ProgreessBar.startAnimation(scaleAnimation5);
+        mReward1ProgressBar.startAnimation(scaleAnimation1);
+        mReward2ProgressBar.startAnimation(scaleAnimation2);
+        mReward3ProgressBar.startAnimation(scaleAnimation3);
+        mReward4ProgressBar.startAnimation(scaleAnimation4);
+        mReward5ProgressBar.startAnimation(scaleAnimation5);
 
         ShowScore();
 
@@ -174,14 +237,24 @@ public class WomenGodRankActivity extends AppCompatActivity {
         mRank4Score = (TextView) findViewById(R.id.womanRank4Score);
         mRank5Score = (TextView) findViewById(R.id.womanRank5Score);
 
-        mRank1Score.setText(String.valueOf(mRank1));
-        mRank1LabelScore.setText(String.valueOf(mRank1));
-        mRank2Score.setText(String.valueOf(mRank2));
-        mRank2LabelScore.setText(String.valueOf(mRank2));
-        mRank3Score.setText(String.valueOf(mRank3));
-        mRank3LabelScore.setText(String.valueOf(mRank2));
-        mRank4Score.setText(String.valueOf(mRank4));
-        mRank5Score.setText(String.valueOf(mRank5));
+        if (mRank1 > 0) {
+            mRank1Score.setText(String.valueOf(mRank1));
+            mRank1LabelScore.setText(String.valueOf(mRank1));
+        }
+        if (mRank2 > 0) {
+            mRank2Score.setText(String.valueOf(mRank2));
+            mRank2LabelScore.setText(String.valueOf(mRank2));
+        }
+        if (mRank3 > 0) {
+            mRank3Score.setText(String.valueOf(mRank3));
+            mRank3LabelScore.setText(String.valueOf(mRank2));
+        }
+        if (mRank4 > 0) {
+            mRank4Score.setText(String.valueOf(mRank4));
+        }
+        if (mRank5 > 0) {
+            mRank5Score.setText(String.valueOf(mRank5));
+        }
     }
 
     public void ChangeToQR() {

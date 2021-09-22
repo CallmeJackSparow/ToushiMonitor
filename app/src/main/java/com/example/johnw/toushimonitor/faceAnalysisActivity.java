@@ -88,8 +88,8 @@ public class faceAnalysisActivity extends AppCompatActivity {
         String height = getIntent().getStringExtra("player1Height");
 
         String imageFileName = getExternalFilesDir(null).getAbsolutePath() + "/image/face.jpg";
-        Bitmap bitmap = handleBitmap.CaptureImage(imageFileName, Integer.parseInt(left) - 40, Integer.parseInt(top) - 40,
-                Integer.parseInt(width) + 80, Integer.parseInt(height) + 80);
+        Bitmap bitmap = handleBitmap.CaptureImage(imageFileName, Integer.parseInt(left) - 200, Integer.parseInt(top) - 200,
+                Integer.parseInt(width) + 400, Integer.parseInt(height) + 400);
         mImageView.setImageBitmap(bitmap);
         //mImageView.setRotation(270);
 

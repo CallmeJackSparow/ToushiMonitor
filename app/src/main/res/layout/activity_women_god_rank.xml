@@ -103,6 +103,7 @@
                 android:layout_width="142px"
                 android:layout_height="142px"
                 android:background="@drawable/rank1"
+                android:visibility="invisible"
                 android:layout_centerHorizontal="true"/>
 
             <ImageView
@@ -111,6 +112,7 @@
                 android:layout_marginTop="40px"
                 android:layout_width="100px"
                 android:layout_height="100px"
+                android:visibility="invisible"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/circle"/>
 
@@ -122,7 +124,7 @@
                 android:layout_height="100px"
                 android:layout_marginLeft="370px"
                 android:text=""
-                android:textSize="20dp"
+                android:textSize="45px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
@@ -133,6 +135,7 @@
                 android:layout_width="104px"
                 android:layout_height="104px"
                 android:background="@drawable/rank2"
+                android:visibility="invisible"
                 android:layout_marginLeft="200px" />
 
             <ImageView
@@ -142,6 +145,7 @@
                 android:layout_width="85px"
                 android:layout_height="85px"
                 android:layout_marginLeft="210px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/womanRank2ScoreLabel"
@@ -151,7 +155,7 @@
                 android:layout_height="80px"
                 android:layout_marginLeft="255px"
                 android:text=""
-                android:textSize="15dp"
+                android:textSize="45px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
@@ -162,6 +166,7 @@
                 android:layout_width="82px"
                 android:layout_height="82px"
                 android:background="@drawable/rank3"
+                android:visibility="invisible"
                 android:layout_marginLeft="510px" />
 
             <ImageView
@@ -171,6 +176,7 @@
                 android:layout_width="68px"
                 android:layout_height="68px"
                 android:layout_marginLeft="518px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/womanRank3ScoreLabel"
@@ -180,17 +186,18 @@
                 android:layout_height="100px"
                 android:layout_marginLeft="495px"
                 android:text=""
-                android:textSize="15dp"
+                android:textSize="45px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward1Image"
+                android:id="@+id/womenReward1Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/womanReward1ProcessBar"
@@ -199,6 +206,7 @@
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/womanRank1Score"
@@ -209,15 +217,17 @@
                 android:layout_alignRight="@id/womanReward1ProcessBar"
                 android:textColor="#FFFFFF"
                 android:text=""
+                android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward1"
+                android:id="@+id/womenReward1"
                 android:layout_width="110px"
                 android:layout_height="110px"
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
 
             <ImageView
@@ -228,23 +238,26 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
-                android:id="@+id/reward2Image"
+                android:id="@+id/womenReward2Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward1Image"
+                android:layout_below="@id/womenReward1Image"
                 android:layout_marginTop= "50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/womanReward2ProcessBar"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward1Image"
+                android:layout_below="@id/womenReward1Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/womanRank2Score"
@@ -255,41 +268,46 @@
                 android:layout_alignRight="@id/womanReward2ProcessBar"
                 android:textColor="#FFFFFF"
                 android:text=""
+                android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward2"
+                android:id="@+id/womenReward2"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward1"
+                android:layout_below="@id/womenReward1"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/womenReward2head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward1"
+                android:layout_below="@id/womenReward1"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
-                android:id="@+id/reward3Image"
+                android:id="@+id/womenReward3Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward2Image"
+                android:layout_below="@id/womenReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/womanReward3ProcessBar"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward2Image"
+                android:layout_below="@id/womenReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/womanRank3Score"
@@ -300,41 +318,46 @@
                 android:layout_alignRight="@id/womanReward3ProcessBar"
                 android:textColor="#FFFFFF"
                 android:text=""
+                android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward3"
+                android:id="@+id/womenReward3"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward2"
+                android:layout_below="@id/womenReward2"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/womenReward3head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward2"
+                android:layout_below="@id/womenReward2"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
-                android:id="@+id/reward4Image"
+                android:id="@+id/womenReward4Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward3Image"
+                android:layout_below="@id/womenReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/womanReward4ProcessBar"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward3Image"
+                android:layout_below="@id/womenReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/womanRank4Score"
@@ -345,41 +368,46 @@
                 android:layout_alignRight="@id/womanReward4ProcessBar"
                 android:textColor="#FFFFFF"
                 android:text=""
+                android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward4"
+                android:id="@+id/womenReward4"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward3"
+                android:layout_below="@id/womenReward3"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/womenReward4head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward3"
+                android:layout_below="@id/womenReward3"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
-                android:id="@+id/reward5Image"
+                android:id="@+id/womenReward5Image"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward4Image"
+                android:layout_below="@id/womenReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/womanReward5ProcessBar"
                 android:layout_width="628px"
                 android:layout_height="70px"
-                android:layout_below="@id/reward4Image"
+                android:layout_below="@id/womenReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/womanRank5Score"
@@ -390,29 +418,28 @@
                 android:layout_alignRight="@id/womanReward5ProcessBar"
                 android:textColor="#FFFFFF"
                 android:text=""
+                android:textSize="40px"
                 android:fontFamily="@font/sourcehansans"/>
 
             <ImageView
-                android:id="@+id/reward5"
+                android:id="@+id/womenReward5"
                 android:layout_width="110px"
                 android:layout_height="110px"
-                android:layout_below="@id/reward4"
+                android:layout_below="@id/womenReward4"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/womenReward5head"
                 android:layout_gravity="center"
-                android:layout_below="@id/reward4"
+                android:layout_below="@id/womenReward4"
                 android:layout_marginLeft="65px"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
-
-
         </RelativeLayout>
-
     </LinearLayout>
-
 </RelativeLayout>

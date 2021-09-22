@@ -104,6 +104,7 @@
                 android:layout_width="142px"
                 android:layout_height="142px"
                 android:background="@drawable/rank1"
+                android:visibility="invisible"
                 android:layout_centerHorizontal="true"/>
 
             <ImageView
@@ -112,6 +113,7 @@
                 android:layout_marginTop="40px"
                 android:layout_width="100px"
                 android:layout_height="100px"
+                android:visibility="invisible"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/circle"/>
 
@@ -135,6 +137,7 @@
                 android:layout_width="104px"
                 android:layout_height="104px"
                 android:background="@drawable/rank2"
+                android:visibility="invisible"
                 android:layout_marginLeft="210px" />
 
             <ImageView
@@ -144,6 +147,7 @@
                 android:layout_width="85px"
                 android:layout_height="85px"
                 android:layout_marginLeft="220px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/pkRank2ScoreLabel"
@@ -164,6 +168,7 @@
                 android:layout_marginTop="150px"
                 android:layout_width="82px"
                 android:layout_height="82px"
+                android:visibility="invisible"
                 android:background="@drawable/rank3"
                 android:layout_marginLeft="510px" />
 
@@ -174,6 +179,7 @@
                 android:layout_width="68px"
                 android:layout_height="68px"
                 android:layout_marginLeft="518px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/pkRank3ScoreLabel"
@@ -195,6 +201,7 @@
                 android:layout_below="@id/pkRostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/pkProcessBar1"
@@ -203,6 +210,7 @@
                 android:layout_below="@id/pkRostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/pkRank1Score"
@@ -223,6 +231,7 @@
                 android:layout_below="@id/pkRostram"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/pkReward1head"
@@ -232,6 +241,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <!--滚动条2-->
@@ -242,6 +252,7 @@
                 android:layout_below="@id/pkReward1Image"
                 android:layout_marginTop= "50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/pkProcessBar2"
@@ -250,6 +261,7 @@
                 android:layout_below="@id/pkReward1Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/pkRank2Score"
@@ -270,6 +282,7 @@
                 android:layout_below="@id/pkReward1"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/pkReward2head"
@@ -279,6 +292,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <!--滚动条3-->
@@ -289,6 +303,7 @@
                 android:layout_below="@id/pkReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/pkProcessBar3"
@@ -297,6 +312,7 @@
                 android:layout_below="@id/pkReward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/pkRank3Score"
@@ -317,6 +333,7 @@
                 android:layout_below="@id/pkReward2"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/pkReward3head"
@@ -326,6 +343,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <!--排行榜4-->
@@ -336,6 +354,7 @@
                 android:layout_below="@id/pkReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/pkProcessBar4"
@@ -344,6 +363,7 @@
                 android:layout_below="@id/pkReward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/pkRank4Score"
@@ -364,6 +384,7 @@
                 android:layout_below="@id/pkReward3"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/pkReward4head"
@@ -373,6 +394,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <!--排行榜5-->
@@ -383,6 +405,7 @@
                 android:layout_below="@id/pkReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/pkProcessBar5"
@@ -391,6 +414,7 @@
                 android:layout_below="@id/pkReward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/pkRank5Score"
@@ -411,6 +435,7 @@
                 android:layout_below="@id/pkReward4"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/pkReward5head"
@@ -420,6 +445,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
         </RelativeLayout>
 

@@ -31,7 +31,7 @@
             android:layout_height="100px"
             android:layout_marginTop="0px"
             android:layout_centerHorizontal="true"
-            android:text="100"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="50px"
@@ -103,6 +103,7 @@
                 android:layout_marginTop="20px"
                 android:layout_width="142px"
                 android:layout_height="142px"
+                android:visibility="invisible"
                 android:background="@drawable/rank1"
                 android:layout_centerHorizontal="true"/>
 
@@ -112,6 +113,7 @@
                 android:layout_marginTop="40px"
                 android:layout_width="100px"
                 android:layout_height="100px"
+                android:visibility="invisible"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/circle"/>
 
@@ -122,7 +124,7 @@
                 android:layout_width="100px"
                 android:layout_height="120px"
                 android:layout_marginLeft="375px"
-                android:text="100"
+                android:text=""
                 android:textSize="55px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
@@ -133,6 +135,7 @@
                 android:layout_marginTop="120px"
                 android:layout_width="104px"
                 android:layout_height="104px"
+                android:visibility="invisible"
                 android:background="@drawable/rank2"
                 android:layout_marginLeft="210px" />
 
@@ -143,6 +146,7 @@
                 android:layout_width="85px"
                 android:layout_height="85px"
                 android:layout_marginLeft="220px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
             <TextView
                 android:id="@+id/manRank2ScoreLabel"
@@ -151,7 +155,7 @@
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="255px"
-                android:text="100"
+                android:text=""
                 android:textSize="45px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
@@ -163,6 +167,7 @@
                 android:layout_width="68px"
                 android:layout_height="68px"
                 android:layout_marginLeft="518px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
@@ -171,6 +176,7 @@
                 android:layout_marginTop="150px"
                 android:layout_width="82px"
                 android:layout_height="82px"
+                android:visibility="invisible"
                 android:background="@drawable/rank3"
                 android:layout_marginLeft="510px" />
 
@@ -182,7 +188,7 @@
                 android:layout_width="100px"
                 android:layout_height="100px"
                 android:layout_marginLeft="495px"
-                android:text="100"
+                android:text=""
                 android:textSize="40px"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/sourcehansans"/>
@@ -194,6 +200,7 @@
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/manReward1ProcessBar"
@@ -202,6 +209,7 @@
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="30px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/manRank1Score"
@@ -222,6 +230,7 @@
                 android:layout_below="@id/rostram"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/reward1head"
@@ -231,6 +240,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
@@ -240,6 +250,7 @@
                 android:layout_below="@id/reward1Image"
                 android:layout_marginTop= "50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/manReward2ProcessBar"
@@ -248,6 +259,7 @@
                 android:layout_below="@id/reward1Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/manRank2Score"
@@ -268,6 +280,7 @@
                 android:layout_below="@id/reward1"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/reward2head"
@@ -277,6 +290,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
@@ -286,6 +300,7 @@
                 android:layout_below="@id/reward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/manReward3ProcessBar"
@@ -294,6 +309,7 @@
                 android:layout_below="@id/reward2Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/manRank3Score"
@@ -314,6 +330,7 @@
                 android:layout_below="@id/reward2"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/reward3head"
@@ -323,6 +340,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
 
@@ -333,6 +351,7 @@
                 android:layout_below="@id/reward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/manReward4ProcessBar"
@@ -341,6 +360,7 @@
                 android:layout_below="@id/reward3Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/manRank4Score"
@@ -361,6 +381,7 @@
                 android:layout_below="@id/reward3"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/reward4head"
@@ -370,6 +391,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
 
             <ImageView
@@ -379,6 +401,7 @@
                 android:layout_below="@id/reward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/rankbar" />
             <ImageView
                 android:id="@+id/manReward5ProcessBar"
@@ -387,6 +410,7 @@
                 android:layout_below="@id/reward4Image"
                 android:layout_marginTop="50px"
                 android:layout_marginLeft="120px"
+                android:visibility="invisible"
                 android:background="@drawable/processbar" />
             <TextView
                 android:id="@+id/manRank5Score"
@@ -407,6 +431,7 @@
                 android:layout_below="@id/reward4"
                 android:layout_marginTop="10px"
                 android:layout_marginLeft="50px"
+                android:visibility="invisible"
                 android:background="@drawable/rankimage"/>
             <ImageView
                 android:id="@+id/reward5head"
@@ -416,9 +441,8 @@
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginTop="20px"
+                android:visibility="invisible"
                 android:background="@drawable/circle"/>
-
-
         </RelativeLayout>
 
     </LinearLayout>

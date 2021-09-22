@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -28,6 +29,9 @@ public class PkWinnerBand extends AppCompatActivity {
 
     private Timer mTimer;
     private TimerTask mTimerTask;
+    private ImageView mRank1Circle;
+    private ImageView mRank2Circle;
+    private ImageView mRank3Circle;
     private ImageView mRank1Head;
     private ImageView mRank2Head;
     private ImageView mRank3Head;
@@ -35,17 +39,27 @@ public class PkWinnerBand extends AppCompatActivity {
     private TextView mRank2LabelScore;
     private TextView mRank3LabelScore;
 
+    private ImageView mReward1Base;
+    private ImageView mReward2Base;
+    private ImageView mReward3Base;
+    private ImageView mReward4Base;
+    private ImageView mReward5Base;
     private ImageView mReward1Head;
     private ImageView mReward2Head;
     private ImageView mReward3Head;
     private ImageView mReward4Head;
     private ImageView mReward5Head;
 
-    private ImageView mProgreessBar1;
-    private ImageView mProgreessBar2;
-    private ImageView mProgreessBar3;
-    private ImageView mProgreessBar4;
-    private ImageView mProgreessBar5;
+    private ImageView mProgressBase1;
+    private ImageView mProgressBase2;
+    private ImageView mProgressBase3;
+    private ImageView mProgressBase4;
+    private ImageView mProgressBase5;
+    private ImageView mProgressBar1;
+    private ImageView mProgressBar2;
+    private ImageView mProgressBar3;
+    private ImageView mProgressBar4;
+    private ImageView mProgressBar5;
 
     private TextView mRank1Score;
     private TextView mRank2Score;
@@ -91,22 +105,72 @@ public class PkWinnerBand extends AppCompatActivity {
         mRank1Head = (ImageView) findViewById(R.id.pkRank1Image);
         mRank2Head = (ImageView) findViewById(R.id.pkRank2Image);
         mRank3Head = (ImageView) findViewById(R.id.pkRank3Image);
+        mRank1Circle = (ImageView) findViewById(R.id.pkRank1);
+        mRank2Circle = (ImageView) findViewById(R.id.pkRank2);
+        mRank3Circle = (ImageView) findViewById(R.id.pkRank3);
 
         mRank1LabelScore = (TextView) findViewById(R.id.pkRank1ScoreLabel);
         mRank2LabelScore = (TextView) findViewById(R.id.pkRank2ScoreLabel);
         mRank3LabelScore = (TextView) findViewById(R.id.pkRank3ScoreLabel);
 
+        mReward1Base = (ImageView) findViewById(R.id.pkReward1);
+        mReward2Base = (ImageView) findViewById(R.id.pkReward2);
+        mReward3Base = (ImageView) findViewById(R.id.pkReward3);
+        mReward4Base = (ImageView) findViewById(R.id.pkReward4);
+        mReward5Base = (ImageView) findViewById(R.id.pkReward5);
         mReward1Head = (ImageView) findViewById(R.id.pkReward1head);
         mReward2Head = (ImageView) findViewById(R.id.pkReward2head);
         mReward3Head = (ImageView) findViewById(R.id.pkReward3head);
         mReward4Head = (ImageView) findViewById(R.id.pkReward4head);
         mReward5Head = (ImageView) findViewById(R.id.pkReward5head);
 
-        mProgreessBar1 = (ImageView) findViewById(R.id.pkProcessBar1);
-        mProgreessBar2 = (ImageView) findViewById(R.id.pkProcessBar2);
-        mProgreessBar3 = (ImageView) findViewById(R.id.pkProcessBar3);
-        mProgreessBar4 = (ImageView) findViewById(R.id.pkProcessBar4);
-        mProgreessBar5 = (ImageView) findViewById(R.id.pkProcessBar5);
+        mProgressBase1 = (ImageView) findViewById(R.id.pkReward1Image);
+        mProgressBase2 = (ImageView) findViewById(R.id.pkReward2Image);
+        mProgressBase3 = (ImageView) findViewById(R.id.pkReward3Image);
+        mProgressBase4 = (ImageView) findViewById(R.id.pkReward4Image);
+        mProgressBase5 = (ImageView) findViewById(R.id.pkReward5Image);
+        mProgressBar1 = (ImageView) findViewById(R.id.pkProcessBar1);
+        mProgressBar2 = (ImageView) findViewById(R.id.pkProcessBar2);
+        mProgressBar3 = (ImageView) findViewById(R.id.pkProcessBar3);
+        mProgressBar4 = (ImageView) findViewById(R.id.pkProcessBar4);
+        mProgressBar5 = (ImageView) findViewById(R.id.pkProcessBar5);
+
+        if (mRank1 > 0) {
+            mRank1Head.setVisibility(View.VISIBLE);
+            mRank1Circle.setVisibility(View.VISIBLE);
+            mReward1Base.setVisibility(View.VISIBLE);
+            mReward1Head.setVisibility(View.VISIBLE);
+            mProgressBase1.setVisibility(View.VISIBLE);
+            mProgressBar1.setVisibility(View.VISIBLE);
+        }
+        if (mRank2 > 0) {
+            mRank2Head.setVisibility(View.VISIBLE);
+            mRank2Circle.setVisibility(View.VISIBLE);
+            mReward2Base.setVisibility(View.VISIBLE);
+            mReward2Head.setVisibility(View.VISIBLE);
+            mProgressBase2.setVisibility(View.VISIBLE);
+            mProgressBar2.setVisibility(View.VISIBLE);
+        }
+        if (mRank3 > 0) {
+            mRank3Head.setVisibility(View.VISIBLE);
+            mRank3Circle.setVisibility(View.VISIBLE);
+            mReward3Base.setVisibility(View.VISIBLE);
+            mReward3Head.setVisibility(View.VISIBLE);
+            mProgressBase3.setVisibility(View.VISIBLE);
+            mProgressBar3.setVisibility(View.VISIBLE);
+        }
+        if (mRank4 > 0) {
+            mReward4Base.setVisibility(View.VISIBLE);
+            mReward4Head.setVisibility(View.VISIBLE);
+            mProgressBase4.setVisibility(View.VISIBLE);
+            mProgressBar4.setVisibility(View.VISIBLE);
+        }
+        if (mRank5 > 0) {
+            mReward5Base.setVisibility(View.VISIBLE);
+            mReward5Head.setVisibility(View.VISIBLE);
+            mProgressBase5.setVisibility(View.VISIBLE);
+            mProgressBar5.setVisibility(View.VISIBLE);
+        }
 
         float num1 = mRank1 / (float)100;
         float num2 = mRank2 / (float)100;
@@ -128,11 +192,11 @@ public class PkWinnerBand extends AppCompatActivity {
         scaleAnimation3.setDuration(1000);
         scaleAnimation4.setDuration(1000);
         scaleAnimation5.setDuration(1000);
-        mProgreessBar1.startAnimation(scaleAnimation1);
-        mProgreessBar2.startAnimation(scaleAnimation2);
-        mProgreessBar3.startAnimation(scaleAnimation3);
-        mProgreessBar4.startAnimation(scaleAnimation4);
-        mProgreessBar5.startAnimation(scaleAnimation5);
+        mProgressBar1.startAnimation(scaleAnimation1);
+        mProgressBar2.startAnimation(scaleAnimation2);
+        mProgressBar3.startAnimation(scaleAnimation3);
+        mProgressBar4.startAnimation(scaleAnimation4);
+        mProgressBar5.startAnimation(scaleAnimation5);
 
         ShowScore();
 
@@ -183,14 +247,29 @@ public class PkWinnerBand extends AppCompatActivity {
         mRank4Score = (TextView) findViewById(R.id.pkRank4Score);
         mRank5Score = (TextView) findViewById(R.id.pkRank5Score);
 
-        mRank1Score.setText(String.valueOf(mRank1));
-        mRank1LabelScore.setText(String.valueOf(mRank1));
-        mRank2Score.setText(String.valueOf(mRank2));
-        mRank2LabelScore.setText(String.valueOf(mRank2));
-        mRank3Score.setText(String.valueOf(mRank3));
-        mRank3LabelScore.setText(String.valueOf(mRank3));
-        mRank4Score.setText(String.valueOf(mRank4));
-        mRank5Score.setText(String.valueOf(mRank5));
+        if (mRank1 > 0) {
+            mRank1Score.setText(String.valueOf(mRank1));
+            mRank1LabelScore.setText(String.valueOf(mRank1));
+        }
+        if (mRank2 > 0) {
+            mRank2Score.setText(String.valueOf(mRank2));
+            mRank2LabelScore.setText(String.valueOf(mRank2));
+        }
+        if (mRank3 > 0) {
+            mRank3Score.setText(String.valueOf(mRank3));
+            mRank3LabelScore.setText(String.valueOf(mRank3));
+        }
+        if (mRank4 > 0) {
+            mRank4Score.setText(String.valueOf(mRank4));
+        }
+        if (mRank5 > 0) {
+            mRank5Score.setText(String.valueOf(mRank5));
+        }
+
+
+
+
+
     }
 
     public void ChangeToQR() {
